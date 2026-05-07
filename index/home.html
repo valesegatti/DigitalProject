@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human-Centric Security Engineering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: #ffffff;
+            color: #0f172a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ─── COLORS ─── */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --accent-indigo: #6366f1;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --border-light: #e2e8f0;
+        }
+
+        /* ─── ANIMATIONS ─── */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-32px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(32px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-80px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(4px);
+            }
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 4rem;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+            animation: slideDown 0.6s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        nav .logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-indigo);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        nav a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            position: relative;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent-indigo);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-indigo);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-mobile-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 20px;
+            padding: 0.5rem;
+        }
+
+        /* ─── CONTAINER ─── */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        /* ─── HERO ─── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 4rem 6rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-emerald);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-tag::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 2px;
+            background: var(--accent-emerald);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            animation: fadeInUp 0.8s ease-out 0.15s both;
+        }
+
+        h1 .highlight {
+            color: var(--accent-indigo);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .hero-subtitle strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .hero-hashtag {
+            font-size: 14px;
+            color: var(--accent-emerald);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease-out 0.45s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .btn {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary {
+            color: white;
+            background: var(--accent-indigo);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            color: var(--accent-indigo);
+            background: transparent;
+            border: 2px solid var(--accent-indigo);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-indigo);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .scroll-hint {
+            margin-top: 5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            animation: fadeInUp 0.8s ease-out 0.75s both;
+        }
+
+        .scroll-hint span {
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* ─── SECTION DIVIDER ─── */
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(226, 232, 240, 0.4), transparent);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ─── ABOUT ─── */
+        #about {
+            background: var(--bg-secondary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .about-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .about-right {
+            animation: slideInRight 0.8s ease-out 0.2s both;
+        }
+
+        .section-tag {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-emerald);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .about-left p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-left p strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .pillars {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .pillar {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            backdrop-filter: blur(8px);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .pillar:nth-child(1) { animation-delay: 0.3s; }
+        .pillar:nth-child(2) { animation-delay: 0.4s; }
+        .pillar:nth-child(3) { animation-delay: 0.5s; }
+
+        .pillar-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-indigo);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .pillar-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .card {
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: scaleIn 0.6s ease-out both;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .card-code {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+        }
+
+        .code-key {
+            color: var(--accent-indigo);
+        }
+
+        .code-value {
+            color: var(--accent-emerald);
+        }
+
+        /* ─── UVP ─── */
+        #uvp {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%);
+            position: relative;
+            z-index: 1;
+        }
+
+        .uvp-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .uvp-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .uvp-right {
+            animation: slideInRight 0.8s ease-out 0.2s both;
+        }
+
+        .uvp-badge {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: white;
+            background: var(--accent-indigo);
+            padding: 0.6rem 1.2rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .uvp-left p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        blockquote {
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.6;
+            border-left: 4px solid var(--accent-indigo);
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+            margin-left: 0;
+        }
+
+        blockquote .highlight {
+            color: var(--accent-emerald);
+        }
+
+        .uvp-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.85;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ─── SERVICES ─── */
+        #services {
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 4rem;
+        }
+
+        .services-header {
+            margin-bottom: 4rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            padding: 2.5rem;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out both;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.15s; }
+        .service-card:nth-child(2) { animation-delay: 0.25s; }
+        .service-card:nth-child(3) { animation-delay: 0.35s; }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .service-card.indigo::before {
+            background: var(--accent-indigo);
+        }
+
+        .service-card.emerald::before {
+            background: var(--accent-emerald);
+        }
+
+        .service-card.amber::before {
+            background: var(--accent-amber);
+        }
+
+        .service-num {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 1.5rem;        }
+
+        .service-num.indigo {
+            color: var(--accent-indigo);
+        }
+
+        .service-num.emerald {
+            color: var(--accent-emerald);
+        }
+
+        .service-num.amber {
+            color: var(--accent-amber);
+        }
+
+        .service-icon {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+        }
+
+        .service-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .service-icon.indigo {
+            color: var(--accent-indigo);
+        }
+
+        .service-icon.emerald {
+            color: var(--accent-emerald);
+        }
+
+        .service-icon.amber {
+            color: var(--accent-amber);
+        }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .service-tag.indigo {
+            color: var(--accent-indigo);
+        }
+
+        .service-tag.emerald {
+            color: var(--accent-emerald);
+        }
+
+        .service-tag.amber {
+            color: var(--accent-amber);
+        }
+
+        /* ─── HASHTAG ROW ─── */
+        .hashtag-row {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 4rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            background: var(--bg-secondary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hashtag {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: default;
+            transition: color 0.3s ease;
+            animation: fadeInUp 0.5s ease-out both;
+        }
+
+        .hashtag:nth-child(1) { animation-delay: 0s; }
+        .hashtag:nth-child(2) { animation-delay: 0.05s; }
+        .hashtag:nth-child(3) { animation-delay: 0.1s; }
+        .hashtag:nth-child(4) { animation-delay: 0.15s; }
+        .hashtag:nth-child(5) { animation-delay: 0.2s; }
+        .hashtag:nth-child(6) { animation-delay: 0.25s; }
+
+        .hashtag:hover {
+            color: var(--accent-indigo);
+        }
+
+        /* ─── CTA ─── */
+        #cta {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .cta-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .cta-right {
+            animation: slideInRight 0.8s ease-out 0.2s both;
+        }
+
+        .cta-left h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-left p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.85;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn-linkedin {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: white;
+            background: var(--accent-indigo);
+            padding: 1.1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-linkedin:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-linkedin svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        .manifesto-card {
+            padding: 2.5rem;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            animation: scaleIn 0.6s ease-out 0.2s both;
+        }
+
+        .manifesto-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-indigo);
+            text-transform: uppercase;
+            margin-bottom: 1.75rem;
+            letter-spacing: 1px;
+        }
+
+        .manifesto-line {
+            display: flex;
+            gap: 1rem;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 1rem;
+            animation: slideInLeft 0.5s ease-out both;
+        }
+
+        .manifesto-line:nth-child(2) { animation-delay: 0.3s; }
+        .manifesto-line:nth-child(3) { animation-delay: 0.4s; }
+        .manifesto-line:nth-child(4) { animation-delay: 0.5s; }
+        .manifesto-line:nth-child(5) { animation-delay: 0.6s; }
+        .manifesto-line:nth-child(6) { animation-delay: 0.7s; }
+
+        .manifesto-arrow {
+            color: var(--accent-emerald);
+            font-weight: 700;
+            user-select: none;
+        }
+
+        .manifesto-text {
+            font-weight: 500;
+        }
+
+        .manifesto-line.highlight .manifesto-text {
+            color: var(--accent-emerald);
+            font-weight: 700;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            border-top: 1px solid rgba(226, 232, 240, 0.6);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            background: var(--bg-secondary);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .footer-left {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.3px;
+        }
+
+        .footer-right {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-indigo);
+            letter-spacing: 0.3px;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .nav-mobile-btn {
+                display: block;
+            }
+
+            #hero {
+                padding: 7rem 1.5rem 4rem;
+            }
+
+            .about-wrap,
+            .uvp-wrap,
+            .cta-wrap {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+                padding: 4rem 1.5rem !important;
+            }
+
+            .services-wrap {
+                padding: 4rem 1.5rem !important;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .hashtag-row {
+                padding: 3rem 1.5rem !important;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            h1 {
+                font-size: clamp(2rem, 5vw, 3rem);
+            }
+
+            h2 {
+                font-size: clamp(1.5rem, 3vw, 2rem);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .cta-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAV -->
+    <nav id="navbar">
+        <a href="#hero" class="logo">SEC_ENG</a>
+        <ul>
+            <li><a href="#about">Method</a></li>
+            <li><a href="#uvp">Approach</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#cta">Connect</a></li>
+        </ul>
+        <button class="nav-mobile-btn" id="mobileMenuBtn">☰</button>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-tag">Electronic Engineering · Cybersecurity</div>
+        <h1>Protecting Data through <span class="highlight">Human-Centric</span><br>Engineering</h1>
+        <p class="hero-subtitle">Bridging the gap between complex electronic systems and human awareness.<br>Because <strong>the strongest firewall is a trained mind.</strong></p>
+        <p class="hero-hashtag">#BeAware</p>
+        <div class="cta-buttons">
+            <a href="#cta" class="btn btn-primary">Connect with Me</a>
+            <a href="#services" class="btn btn-secondary">View Services</a>
+        </div>
+        <div class="scroll-hint">
+            <span>↓</span>
+            Scroll to explore
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="about-wrap">
+            <div class="about-left">
+                <div class="section-tag">// 01 — the method</div>
+                <h2>Order. Methodology.<br>Leadership.</h2>
+                <p>My path is unconventional by design. As <strong>Editor-in-Chief of my school publication</strong>, I learned early that the hardest engineering problem isn't technical — it's communication. Breaking down complex systems into clarity that moves people to act.</p>
+                <p>As a <strong>tutor</strong>, I refined the most underestimated security tool in existence: human understanding. <strong>Electronic Engineering</strong> gave me the analytical framework — circuit-level precision, signal integrity, systems thinking — to approach every problem with rigor.</p>
+                <p>Together, these disciplines form a single philosophy: <strong>security is not installed, it is understood.</strong></p>
+
+                <div class="pillars">
+                    <div class="pillar">
+                        <div class="pillar-label">Order</div>
+                        <div class="pillar-text">Structured thinking from hardware schematics to security policies. Chaos is the adversary.</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-label">Methodology</div>
+                        <div class="pillar-text">Systematic auditing, documented processes, and reproducible security frameworks.</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-label">Leadership</div>
+                        <div class="pillar-text">Security culture starts at the top and spreads through every human node in the network.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-right">
+                <div class="card">
+                    <div class="card-label">// profile.json</div>
+                    <div class="card-code">
+                        <div>{</div>
+                        <div>&nbsp;&nbsp;<span class="code-key">"role"</span>: <span class="code-value">"Cybersecurity Engineer"</span>,</div>
+                        <div>&nbsp;&nbsp;<span class="code-key">"background"</span>: [</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-value">"Electronic Engineering"</span>,</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-value">"Security Coaching"</span>,</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-value">"Technical Communication"</span></div>
+                        <div>&nbsp;&nbsp;],</div>
+                        <div>&nbsp;&nbsp;<span class="code-key">"approach"</span>: <span class="code-value">"human-centric"</span>,</div>
+                        <div>&nbsp;&nbsp;<span class="code-key">"status"</span>: <span class="code-value">"open_to_connect"</span></div>
+                        <div>}</div>
+                    </div>
+                </div>
+
+                <div class="card" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);">
+                    <div class="card-label">// security_audit.sh</div>
+                    <div class="card-code">
+                        <div><span class="code-key">$</span> run security_audit.sh</div>
+                        <div style="color: var(--text-muted); margin-top: 0.5rem;">——————————————————</div>
+                        <div style="margin-top: 0.5rem;"><span class="code-value">✓</span> Hardware layer ... <span class="code-value" style="font-weight: 600;">SECURED</span></div>
+                        <div><span class="code-value">✓</span> Process layer ... <span class="code-value" style="font-weight: 600;">AUDITED</span></div>
+                        <div><span class="code-value">✓</span> Human layer ... <span class="code-value" style="font-weight: 600;">TRAINED</span></div>
+                        <div style="color: var(--text-muted); margin-top: 0.5rem;">——————————————————</div>
+                        <div style="margin-top: 0.5rem;"><span class="code-key">RESILIENCE_SCORE</span>: <span class="code-value">98.7%</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- UVP -->
+    <section id="uvp">
+        <div class="uvp-wrap">
+            <div class="uvp-left">
+                <span class="uvp-badge">UVP</span>
+                <p>What makes the<br>approach different.</p>
+            </div>
+
+            <div class="uvp-right">
+                <blockquote>"I don't just secure systems — <span class="highlight">I secure the people who use them.</span>"</blockquote>
+                <p class="uvp-text">My approach combines hardware-level understanding with high-level process auditing and security coaching. Where most solutions patch vulnerabilities in code, I patch vulnerabilities in culture. Because a misconfigured human is the most exploited attack vector of all.</p>
+                <p class="uvp-text">Technical threats are translated into actionable human habits. Complex signals become legible strategies. The invisible is made visible, documented, and defended.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <div class="services-wrap">
+            <div class="services-header">
+                <div class="section-tag">// 02 — expertise &amp; services</div>
+                <h2>What I Deliver</h2>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card indigo">
+                    <div class="service-num indigo">01</div>
+                    <div class="service-icon indigo">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+                        </svg>
+                    </div>
+                    <h3>Cyber-Process Auditing</h3>
+                    <p>Turning chaotic workflows into orderly, secure systems. I map human processes with the same precision as circuit diagrams — every node, every signal, every failure point.</p>
+                    <span class="service-tag indigo">#ProcessSecurity</span>
+                </div>
+
+                <div class="service-card emerald">
+                    <div class="service-num emerald">02</div>
+                    <div class="service-icon emerald">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Security Coaching</h3>
+                    <p>Translating technical threats into actionable human habits. From phishing awareness to password hygiene — engineering literacy for every member of the team.</p>
+                    <span class="service-tag emerald">#HumanFirewall</span>
+                </div>
+
+                <div class="service-card amber">
+                    <div class="service-num amber">03</div>
+                    <div class="service-icon amber">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                    </div>
+                    <h3>Technical Communication</h3>
+                    <p>Making the invisible — code, signals, protocols — visible and understandable. Technical writing, documentation, and security briefings that humans actually read.</p>
+                    <span class="service-tag amber">#ClearSignal</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- HASHTAGS -->
+    <div class="hashtag-row">
+        <span class="hashtag">#BeAware</span>
+        <span class="hashtag">#EngineeringAwareness</span>
+        <span class="hashtag">#VibeCoding</span>
+        <span class="hashtag">#CyberSecurity</span>
+        <span class="hashtag">#HumanCentricSecurity</span>
+        <span class="hashtag">#ProcessNotProduct</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CTA -->
+    <section id="cta">
+        <div class="cta-wrap">
+            <div class="cta-left">
+                <div class="section-tag">// 03 — let's build together</div>
+                <h2>Build a<br>Resilient Culture.</h2>
+                <p>Security is a process, not just a product. Whether you need a process audit, team coaching, or technical documentation — let's engineer awareness together.</p>
+                <a href="https://linkedin.com/in/valentina-segatti-b59a633b6?trk=people-guest_people_search-card" target="_blank" rel="noopener noreferrer" class="btn-linkedin">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                    Connect on LinkedIn
+                </a>
+            </div>
+
+            <div class="cta-right">
+                <div class="manifesto-card">
+                    <div class="manifesto-label">// security.manifesto</div>
+                    <div class="manifesto-line">
+                        <span class="manifesto-arrow">→</span>
+                        <span class="manifesto-text">Security is a process, not a product.</span>
+                    </div>
+                    <div class="manifesto-line">
+                        <span class="manifesto-arrow">→</span>
+                        <span class="manifesto-text">People are the perimeter.</span>
+                    </div>
+                    <div class="manifesto-line">
+                        <span class="manifesto-arrow">→</span>
+                        <span class="manifesto-text">Awareness is the first patch.</span>
+                    </div>
+                    <div class="manifesto-line">
+                        <span class="manifesto-arrow">→</span>
+                        <span class="manifesto-text">Order defeats entropy.</span>
+                    </div>
+                    <div class="manifesto-line">
+                        <span class="manifesto-arrow">→</span>
+                        <span class="manifesto-text">The best firewall is a trained mind.</span>
+                    </div>
+                    <div class="manifesto-line highlight">
+                        <span class="manifesto-arrow">→</span>
+                        <span class="manifesto-text">#BeAware</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FOOTER -->
+    <footer>
+        <span class="footer-left">© 2026 — Human-Centric Security Engineering</span>
+        <span class="footer-right">#EngineeringAwareness · #BeAware</span>
+    </footer>
+
+    <script>
+        // Smooth scroll on nav link click
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Nav scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navUl = document.querySelector('nav ul');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            if (navUl.style.display === 'flex') {
+                navUl.style.display = 'none';
+            } else {
+                navUl.style.display = 'flex';
+                navUl.style.position = 'absolute';
+                navUl.style.top = '100%';
+                navUl.style.left = '0';
+                navUl.style.right = '0';
+                navUl.style.flexDirection = 'column';
+                navUl.style.gap = '0';
+                navUl.style.background = 'rgba(255, 255, 255, 0.98)';
+                navUl.style.backdropFilter = 'blur(12px)';
+                navUl.style.borderBottom = '1px solid rgba(226, 232, 240, 0.5)';
+                navUl.style.padding = '1rem 1.5rem';
+                navUl.style.zIndex = '99';
+            }
+        });
+
+        // Close mobile menu when link is clicked
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navUl.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+
+
