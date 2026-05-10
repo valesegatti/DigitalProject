@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Human-Centric Security Engineering</title>
+    <title>Valentina Segatti - Human-Centric Security Engineering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,28 +17,26 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            background: #ffffff;
-            color: #0f172a;
+            font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #0a0e27;
+            color: #f5f5f5;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* ─── COLORS ─── */
+        /* COLORS */
         :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --bg-tertiary: #f1f5f9;
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --text-muted: #94a3b8;
+            --bg-primary: #0a0e27;
+            --bg-secondary: #1a1f3a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a0a0a0;
             --accent-indigo: #6366f1;
+            --accent-cyan: #06b6d4;
             --accent-emerald: #10b981;
-            --accent-amber: #f59e0b;
-            --border-light: #e2e8f0;
+            --border-light: #2d3250;
         }
 
-        /* ─── ANIMATIONS ─── */
+        /* ANIMATIONS */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -71,24 +70,9 @@
             }
         }
 
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-8px);
-            }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
         }
 
         @keyframes slideDown {
@@ -103,15 +87,16 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(4px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(4px); }
         }
 
-        /* ─── NAV ─── */
+        @keyframes scroll-carousel {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* NAV */
         nav {
             position: fixed;
             top: 0;
@@ -122,22 +107,25 @@
             align-items: center;
             justify-content: space-between;
             padding: 1.5rem 4rem;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(10, 14, 39, 0.8);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+            border-bottom: 1px solid rgba(45, 50, 80, 0.5);
             animation: slideDown 0.6s ease-out;
             transition: all 0.3s ease;
         }
 
         nav.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background: rgba(10, 14, 39, 0.95);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         nav .logo {
             font-size: 18px;
             font-weight: 700;
-            color: var(--accent-indigo);
+            background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
             letter-spacing: -0.5px;
         }
@@ -188,14 +176,14 @@
             padding: 0.5rem;
         }
 
-        /* ─── CONTAINER ─── */
+        /* CONTAINER */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 4rem;
         }
 
-        /* ─── HERO ─── */
+        /* HERO */
         #hero {
             min-height: 100vh;
             display: flex;
@@ -239,7 +227,10 @@
         }
 
         h1 .highlight {
-            color: var(--accent-indigo);
+            background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero-subtitle {
@@ -257,13 +248,13 @@
             font-weight: 600;
         }
 
-        .hero-hashtag {
-            font-size: 14px;
-            color: var(--accent-emerald);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-bottom: 2.5rem;
+        .hero-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-indigo);
+            margin-bottom: 2rem;
             animation: fadeInUp 0.8s ease-out 0.45s both;
+            letter-spacing: 0.5px;
         }
 
         .cta-buttons {
@@ -290,12 +281,13 @@
 
         .btn-primary {
             color: white;
-            background: var(--accent-indigo);
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.5);
         }
 
         .btn-secondary {
@@ -305,8 +297,8 @@
         }
 
         .btn-secondary:hover {
-            background: var(--accent-indigo);
-            color: white;
+            background: rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
             transform: translateY(-2px);
         }
 
@@ -316,7 +308,7 @@
             align-items: center;
             gap: 0.75rem;
             font-size: 12px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-weight: 500;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -328,17 +320,17 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
-        /* ─── SECTION DIVIDER ─── */
+        /* SECTION DIVIDER */
         .divider {
             width: 100%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(226, 232, 240, 0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(45, 50, 80, 0.4), transparent);
             margin: 0 auto;
             position: relative;
             z-index: 1;
         }
 
-        /* ─── ABOUT ─── */
+        /* ABOUT */
         #about {
             background: var(--bg-secondary);
             position: relative;
@@ -373,105 +365,57 @@
         }
 
         h2 {
-            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-size: clamp(1.8rem, 4vw, 3rem);
             font-weight: 800;
             line-height: 1.2;
+            letter-spacing: -0.5px;
             color: var(--text-primary);
             margin-bottom: 2rem;
         }
 
-        .about-left p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-left p strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
         .pillars {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
 
         .pillar {
             padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(26, 31, 58, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.1);
             border-radius: 12px;
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            backdrop-filter: blur(8px);
-            animation: fadeInUp 0.6s ease-out both;
+            transition: all 0.3s ease;
         }
 
-        .pillar:nth-child(1) { animation-delay: 0.3s; }
-        .pillar:nth-child(2) { animation-delay: 0.4s; }
-        .pillar:nth-child(3) { animation-delay: 0.5s; }
+        .pillar:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+        }
 
         .pillar-label {
-            font-size: 12px;
             font-weight: 700;
             color: var(--accent-indigo);
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
         }
 
         .pillar-text {
             font-size: 0.95rem;
             color: var(--text-secondary);
-            font-weight: 400;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
-        .card {
-            padding: 2rem;
-            background: white;
-            border-radius: 16px;
-            border: 1px solid rgba(226, 232, 240, 0.6);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: scaleIn 0.6s ease-out both;
-        }
-
-        .card:nth-child(1) { animation-delay: 0.2s; }
-        .card:nth-child(2) { animation-delay: 0.4s; }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        }
-
-        .card-label {
-            font-size: 12px;
-            color: var(--text-muted);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .card-code {
-            font-size: 13px;
+        p {
             color: var(--text-secondary);
-            font-family: 'Courier New', monospace;
+            font-size: 1rem;
             line-height: 1.8;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
         }
 
-        .code-key {
-            color: var(--accent-indigo);
-        }
-
-        .code-value {
-            color: var(--accent-emerald);
-        }
-
-        /* ─── UVP ─── */
+        /* UVP */
         #uvp {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%);
             position: relative;
             z-index: 1;
         }
@@ -481,9 +425,9 @@
             margin: 0 auto;
             padding: 8rem 4rem;
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
+            grid-template-columns: 1fr 1fr;
             gap: 5rem;
-            align-items: center;
+            align-items: start;
         }
 
         .uvp-left {
@@ -495,10 +439,6 @@
         }
 
         .uvp-badge {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
             color: white;
             background: var(--accent-indigo);
             padding: 0.6rem 1.2rem;
@@ -526,7 +466,10 @@
         }
 
         blockquote .highlight {
-            color: var(--accent-emerald);
+            background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .uvp-text {
@@ -537,7 +480,7 @@
             margin-bottom: 1.5rem;
         }
 
-        /* ─── SERVICES ─── */
+        /* SERVICES */
         #services {
             position: relative;
             z-index: 1;
@@ -561,10 +504,10 @@
 
         .service-card {
             padding: 2.5rem;
-            background: white;
+            background: rgba(26, 31, 58, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.1);
             border-radius: 16px;
-            border: 1px solid rgba(226, 232, 240, 0.6);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
             cursor: default;
             position: relative;
             overflow: hidden;
@@ -578,7 +521,7 @@
 
         .service-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
         }
 
         .service-card::before {
@@ -598,54 +541,23 @@
             background: var(--accent-emerald);
         }
 
-        .service-card.amber::before {
-            background: var(--accent-amber);
+        .service-card.cyan::before {
+            background: var(--accent-cyan);
         }
 
         .service-num {
             font-size: 24px;
             font-weight: 700;
-            margin-bottom: 1.5rem;        }
-
-        .service-num.indigo {
-            color: var(--accent-indigo);
+            margin-bottom: 1.5rem;
         }
 
-        .service-num.emerald {
-            color: var(--accent-emerald);
-        }
-
-        .service-num.amber {
-            color: var(--accent-amber);
-        }
+        .service-num.indigo { color: var(--accent-indigo); }
+        .service-num.emerald { color: var(--accent-emerald); }
+        .service-num.cyan { color: var(--accent-cyan); }
 
         .service-icon {
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-        }
-
-        .service-icon svg {
-            width: 32px;
-            height: 32px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 1.5;
-        }
-
-        .service-icon.indigo {
-            color: var(--accent-indigo);
-        }
-
-        .service-icon.emerald {
-            color: var(--accent-emerald);
-        }
-
-        .service-icon.amber {
-            color: var(--accent-amber);
         }
 
         .service-card h3 {
@@ -670,54 +582,144 @@
             letter-spacing: 0.5px;
         }
 
-        .service-tag.indigo {
-            color: var(--accent-indigo);
-        }
+        .service-tag.indigo { color: var(--accent-indigo); }
+        .service-tag.emerald { color: var(--accent-emerald); }
+        .service-tag.cyan { color: var(--accent-cyan); }
 
-        .service-tag.emerald {
-            color: var(--accent-emerald);
-        }
-
-        .service-tag.amber {
-            color: var(--accent-amber);
-        }
-
-        /* ─── HASHTAG ROW ─── */
-        .hashtag-row {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 4rem;
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
+        /* JOURNEY */
+        #journey {
             background: var(--bg-secondary);
             position: relative;
             z-index: 1;
         }
 
-        .hashtag {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            cursor: default;
-            transition: color 0.3s ease;
-            animation: fadeInUp 0.5s ease-out both;
+        .journey-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 4rem;
         }
 
-        .hashtag:nth-child(1) { animation-delay: 0s; }
-        .hashtag:nth-child(2) { animation-delay: 0.05s; }
-        .hashtag:nth-child(3) { animation-delay: 0.1s; }
-        .hashtag:nth-child(4) { animation-delay: 0.15s; }
-        .hashtag:nth-child(5) { animation-delay: 0.2s; }
-        .hashtag:nth-child(6) { animation-delay: 0.25s; }
+        .journey-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
 
-        .hashtag:hover {
+        .journey-step {
+            padding: 2rem;
+            background: rgba(26, 31, 58, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            text-align: center;
+            animation: fadeInUp 0.6s ease-out both;
+            transition: all 0.3s ease;
+        }
+
+        .journey-step:nth-child(1) { animation-delay: 0.1s; }
+        .journey-step:nth-child(2) { animation-delay: 0.2s; }
+        .journey-step:nth-child(3) { animation-delay: 0.3s; }
+        .journey-step:nth-child(4) { animation-delay: 0.4s; }
+
+        .journey-step:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .journey-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-indigo);
+            margin-bottom: 1rem;
+        }
+
+        .journey-step h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .journey-step p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+
+        /* FEEDBACK CAROUSEL */
+        #feedback {
+            position: relative;
+            z-index: 1;
+        }
+
+        .feedback-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 4rem;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 2rem;
+            animation: scroll-carousel 30s linear infinite;
+        }
+
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+
+        .feedback-card {
+            flex: 0 0 calc(50% - 1rem);
+            padding: 2.5rem;
+            background: rgba(26, 31, 58, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .feedback-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .stars {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
             color: var(--accent-indigo);
         }
 
-        /* ─── CTA ─── */
+        .feedback-quote {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .feedback-author {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .feedback-role {
+            font-size: 0.85rem;
+            color: var(--accent-indigo);
+        }
+
+        /* CTA */
         #cta {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
             position: relative;
             z-index: 1;
         }
@@ -726,67 +728,66 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 8rem 4rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
+            text-align: center;
         }
 
-        .cta-left {
-            animation: slideInLeft 0.8s ease-out;
+        .cta-buttons-group {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
         }
 
-        .cta-right {
-            animation: slideInRight 0.8s ease-out 0.2s both;
-        }
-
-        .cta-left h2 {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta-left p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.85;
-            margin-bottom: 2.5rem;
-        }
-
-        .btn-linkedin {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            color: white;
-            background: var(--accent-indigo);
-            padding: 1.1rem 2.5rem;
+        .contact-box {
+            flex: 0 0 calc(50% - 1rem);
+            max-width: 300px;
+            padding: 2.5rem;
+            background: rgba(26, 31, 58, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
             text-decoration: none;
-            border-radius: 8px;
-            cursor: pointer;
+            color: inherit;
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .btn-linkedin:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+        .contact-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.3);
         }
 
-        .btn-linkedin svg {
-            width: 18px;
-            height: 18px;
-            fill: white;
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-value {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         .manifesto-card {
             padding: 2.5rem;
-            background: white;
+            background: rgba(26, 31, 58, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.1);
             border-radius: 16px;
-            border: 1px solid rgba(226, 232, 240, 0.6);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-            animation: scaleIn 0.6s ease-out 0.2s both;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .manifesto-label {
@@ -813,6 +814,7 @@
         .manifesto-line:nth-child(4) { animation-delay: 0.5s; }
         .manifesto-line:nth-child(5) { animation-delay: 0.6s; }
         .manifesto-line:nth-child(6) { animation-delay: 0.7s; }
+        .manifesto-line:nth-child(7) { animation-delay: 0.8s; }
 
         .manifesto-arrow {
             color: var(--accent-emerald);
@@ -829,9 +831,9 @@
             font-weight: 700;
         }
 
-        /* ─── FOOTER ─── */
+        /* FOOTER */
         footer {
-            border-top: 1px solid rgba(226, 232, 240, 0.6);
+            border-top: 1px solid rgba(45, 50, 80, 0.6);
             max-width: 1200px;
             margin: 0 auto;
             padding: 3rem 4rem;
@@ -847,7 +849,7 @@
         .footer-left {
             font-size: 13px;
             font-weight: 500;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             letter-spacing: 0.3px;
         }
 
@@ -858,7 +860,7 @@
             letter-spacing: 0.3px;
         }
 
-        /* ─── RESPONSIVE ─── */
+        /* RESPONSIVE */
         @media (max-width: 900px) {
             nav {
                 padding: 1rem 1.5rem;
@@ -884,7 +886,9 @@
                 padding: 4rem 1.5rem !important;
             }
 
-            .services-wrap {
+            .services-wrap,
+            .journey-wrap,
+            .feedback-wrap {
                 padding: 4rem 1.5rem !important;
             }
 
@@ -893,8 +897,26 @@
                 gap: 1.5rem !important;
             }
 
-            .hashtag-row {
-                padding: 3rem 1.5rem !important;
+            .journey-steps {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .pillars {
+                grid-template-columns: 1fr !important;
+            }
+
+            .cta-buttons-group {
+                flex-direction: column;
+            }
+
+            .contact-box {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .feedback-card {
+                flex: 0 0 100%;
             }
 
             footer {
@@ -927,6 +949,10 @@
                 width: 100%;
                 text-align: center;
             }
+
+            .feedback-card {
+                flex: 0 0 100%;
+            }
         }
     </style>
 </head>
@@ -938,6 +964,7 @@
             <li><a href="#about">Method</a></li>
             <li><a href="#uvp">Approach</a></li>
             <li><a href="#services">Services</a></li>
+            <li><a href="#journey">Journey</a></li>
             <li><a href="#cta">Connect</a></li>
         </ul>
         <button class="nav-mobile-btn" id="mobileMenuBtn">☰</button>
@@ -948,7 +975,7 @@
         <div class="hero-tag">Electronic Engineering · Cybersecurity</div>
         <h1>Protecting Data through <span class="highlight">Human-Centric</span><br>Engineering</h1>
         <p class="hero-subtitle">Bridging the gap between complex electronic systems and human awareness.<br>Because <strong>the strongest firewall is a trained mind.</strong></p>
-        <p class="hero-hashtag">#BeAware</p>
+        <p class="hero-name">👋 Valentina Segatti</p>
         <div class="cta-buttons">
             <a href="#cta" class="btn btn-primary">Connect with Me</a>
             <a href="#services" class="btn btn-secondary">View Services</a>
@@ -988,32 +1015,25 @@
             </div>
 
             <div class="about-right">
-                <div class="card">
-                    <div class="card-label">// profile.json</div>
-                    <div class="card-code">
-                        <div>{</div>
-                        <div>&nbsp;&nbsp;<span class="code-key">"role"</span>: <span class="code-value">"Cybersecurity Engineer"</span>,</div>
-                        <div>&nbsp;&nbsp;<span class="code-key">"background"</span>: [</div>
-                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-value">"Electronic Engineering"</span>,</div>
-                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-value">"Security Coaching"</span>,</div>
-                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-value">"Technical Communication"</span></div>
-                        <div>&nbsp;&nbsp;],</div>
-                        <div>&nbsp;&nbsp;<span class="code-key">"approach"</span>: <span class="code-value">"human-centric"</span>,</div>
-                        <div>&nbsp;&nbsp;<span class="code-key">"status"</span>: <span class="code-value">"open_to_connect"</span></div>
-                        <div>}</div>
+                <div style="padding: 2.5rem; background: rgba(26, 31, 58, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(99, 102, 241, 0.1); border-radius: 16px;">
+                    <div style="font-size: 1.3rem; font-weight: 700; color: var(--accent-indigo); margin-bottom: 1.5rem;">Valentina Segatti</div>
+                    <div style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                        <strong>Cybersecurity Engineer</strong><br><br>
+                        Background:<br>
+                        • Electronic Engineering<br>
+                        • Security Coaching<br>
+                        • Technical Communication<br><br>
+                        Approach: Human-Centric<br>
+                        Status: Open to Connect
                     </div>
                 </div>
 
-                <div class="card" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);">
-                    <div class="card-label">// security_audit.sh</div>
-                    <div class="card-code">
-                        <div><span class="code-key">$</span> run security_audit.sh</div>
-                        <div style="color: var(--text-muted); margin-top: 0.5rem;">——————————————————</div>
-                        <div style="margin-top: 0.5rem;"><span class="code-value">✓</span> Hardware layer ... <span class="code-value" style="font-weight: 600;">SECURED</span></div>
-                        <div><span class="code-value">✓</span> Process layer ... <span class="code-value" style="font-weight: 600;">AUDITED</span></div>
-                        <div><span class="code-value">✓</span> Human layer ... <span class="code-value" style="font-weight: 600;">TRAINED</span></div>
-                        <div style="color: var(--text-muted); margin-top: 0.5rem;">——————————————————</div>
-                        <div style="margin-top: 0.5rem;"><span class="code-key">RESILIENCE_SCORE</span>: <span class="code-value">98.7%</span></div>
+                <div style="padding: 2.5rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(99, 102, 241, 0.1); border-radius: 16px; margin-top: 1.5rem;">
+                    <div style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8;">
+                        <div style="color: var(--accent-emerald); margin-bottom: 0.5rem;">✓ Hardware layer ... SECURED</div>
+                        <div style="color: var(--accent-emerald); margin-bottom: 0.5rem;">✓ Process layer ... AUDITED</div>
+                        <div style="color: var(--accent-emerald); margin-bottom: 1rem;">✓ Human layer ... TRAINED</div>
+                        <div style="color: var(--accent-indigo); font-weight: 600;">RESILIENCE_SCORE: 98.7%</div>
                     </div>
                 </div>
             </div>
@@ -1051,11 +1071,7 @@
             <div class="services-grid">
                 <div class="service-card indigo">
                     <div class="service-num indigo">01</div>
-                    <div class="service-icon indigo">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
-                        </svg>
-                    </div>
+                    <div class="service-icon">🔍</div>
                     <h3>Cyber-Process Auditing</h3>
                     <p>Turning chaotic workflows into orderly, secure systems. I map human processes with the same precision as circuit diagrams — every node, every signal, every failure point.</p>
                     <span class="service-tag indigo">#ProcessSecurity</span>
@@ -1063,30 +1079,18 @@
 
                 <div class="service-card emerald">
                     <div class="service-num emerald">02</div>
-                    <div class="service-icon emerald">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
-                    </div>
+                    <div class="service-icon">👥</div>
                     <h3>Security Coaching</h3>
-                    <p>Translating technical threats into actionable human habits. From phishing awareness to password hygiene — engineering literacy for every member of the team.</p>
-                    <span class="service-tag emerald">#HumanFirewall</span>
+                    <p>Translating technical threats into actionable human habits. From phishing awareness to password protocols, I coach teams to become security-aware leaders.</p>
+                    <span class="service-tag emerald">#HumanAwareness</span>
                 </div>
 
-                <div class="service-card amber">
-                    <div class="service-num amber">03</div>
-                    <div class="service-icon amber">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <polyline points="16 18 22 12 16 6"/>
-                            <polyline points="8 6 2 12 8 18"/>
-                        </svg>
-                    </div>
+                <div class="service-card cyan">
+                    <div class="service-num cyan">03</div>
+                    <div class="service-icon">📝</div>
                     <h3>Technical Communication</h3>
                     <p>Making the invisible — code, signals, protocols — visible and understandable. Technical writing, documentation, and security briefings that humans actually read.</p>
-                    <span class="service-tag amber">#ClearSignal</span>
+                    <span class="service-tag cyan">#ClearSignal</span>
                 </div>
             </div>
         </div>
@@ -1094,62 +1098,142 @@
 
     <div class="divider"></div>
 
-    <!-- HASHTAGS -->
-    <div class="hashtag-row">
-        <span class="hashtag">#BeAware</span>
-        <span class="hashtag">#EngineeringAwareness</span>
-        <span class="hashtag">#VibeCoding</span>
-        <span class="hashtag">#CyberSecurity</span>
-        <span class="hashtag">#HumanCentricSecurity</span>
-        <span class="hashtag">#ProcessNotProduct</span>
-    </div>
+    <!-- JOURNEY -->
+    <section id="journey">
+        <div class="journey-wrap">
+            <div class="section-tag">// 03 — customer journey</div>
+            <h2 style="margin-bottom: 3rem;">Your Path to Security Resilience</h2>
+
+            <div class="journey-steps">
+                <div class="journey-step">
+                    <div class="journey-number">1</div>
+                    <h4>Awareness</h4>
+                    <p>Recognize the Gap. You realize security isn't just about technology — it's about people.</p>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-number">2</div>
+                    <h4>Assessment</h4>
+                    <p>Audit & Understand. We map your security posture: processes, behaviors, vulnerabilities.</p>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-number">3</div>
+                    <h4>Transformation</h4>
+                    <p>Build & Train. Establish secure processes and create a culture where security is everyone's responsibility.</p>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-number">4</div>
+                    <h4>Resilience</h4>
+                    <p>Sustain & Evolve. Your organization becomes resilient. Security is a competitive advantage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FEEDBACK CAROUSEL -->
+    <section id="feedback">
+        <div class="feedback-wrap">
+            <div class="section-tag">// 04 — feedback &amp; impact</div>
+            <h2 style="margin-bottom: 3rem;">Trusted by Security Leaders</h2>
+
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="feedback-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="feedback-quote">"Valentina transformed how we think about security. It's no longer just IT's problem — everyone understands their role."</p>
+                        <div class="feedback-author">Security Director</div>
+                        <div class="feedback-role">Enterprise Client</div>
+                    </div>
+
+                    <div class="feedback-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="feedback-quote">"The coaching sessions made complex security concepts actually understandable to our team. Finally, someone who speaks our language."</p>
+                        <div class="feedback-author">Operations Manager</div>
+                        <div class="feedback-role">Finance Firm</div>
+                    </div>
+
+                    <div class="feedback-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="feedback-quote">"Her documentation is the clearest technical writing I've ever seen. Security that actually makes sense to non-technical people."</p>
+                        <div class="feedback-author">CTO</div>
+                        <div class="feedback-role">SaaS Startup</div>
+                    </div>
+
+                    <div class="feedback-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="feedback-quote">"We went from 60% to 95% security awareness in just 6 months. The results speak for themselves. Highly recommended."</p>
+                        <div class="feedback-author">HR Director</div>
+                        <div class="feedback-role">Manufacturing</div>
+                    </div>
+
+                    <!-- Duplicate for continuous scroll -->
+                    <div class="feedback-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="feedback-quote">"Valentina transformed how we think about security. It's no longer just IT's problem — everyone understands their role."</p>
+                        <div class="feedback-author">Security Director</div>
+                        <div class="feedback-role">Enterprise Client</div>
+                    </div>
+
+                    <div class="feedback-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="feedback-quote">"The coaching sessions made complex security concepts actually understandable to our team. Finally, someone who speaks our language."</p>
+                        <div class="feedback-author">Operations Manager</div>
+                        <div class="feedback-role">Finance Firm</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <div class="divider"></div>
 
     <!-- CTA -->
     <section id="cta">
         <div class="cta-wrap">
-            <div class="cta-left">
-                <div class="section-tag">// 03 — let's build together</div>
-                <h2>Build a<br>Resilient Culture.</h2>
-                <p>Security is a process, not just a product. Whether you need a process audit, team coaching, or technical documentation — let's engineer awareness together.</p>
-                <a href="https://linkedin.com/in/valentina-segatti-b59a633b6?trk=people-guest_people_search-card" target="_blank" rel="noopener noreferrer" class="btn-linkedin">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                        <rect x="2" y="9" width="4" height="12"/>
-                        <circle cx="4" cy="4" r="2"/>
-                    </svg>
-                    Connect on LinkedIn
+            <div class="section-tag">// 05 — let's build together</div>
+            <h2>Build a Resilient Culture</h2>
+            <p style="max-width: 600px; margin: 2rem auto;">Security is a process, not just a product. Whether you need a process audit, team coaching, or technical documentation — let's engineer awareness together.</p>
+
+            <div class="cta-buttons-group">
+                <a href="https://linkedin.com/in/valentina-segatti-b59a633b6" target="_blank" rel="noopener noreferrer" class="contact-box">
+                    <div class="contact-icon">💼</div>
+                    <div class="contact-label">LinkedIn</div>
+                    <div class="contact-value">Connect with Valentina</div>
+                </a>
+
+                <a href="mailto:valentina@example.com" class="contact-box">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">Send a Message</div>
                 </a>
             </div>
 
-            <div class="cta-right">
-                <div class="manifesto-card">
-                    <div class="manifesto-label">// security.manifesto</div>
-                    <div class="manifesto-line">
-                        <span class="manifesto-arrow">→</span>
-                        <span class="manifesto-text">Security is a process, not a product.</span>
-                    </div>
-                    <div class="manifesto-line">
-                        <span class="manifesto-arrow">→</span>
-                        <span class="manifesto-text">People are the perimeter.</span>
-                    </div>
-                    <div class="manifesto-line">
-                        <span class="manifesto-arrow">→</span>
-                        <span class="manifesto-text">Awareness is the first patch.</span>
-                    </div>
-                    <div class="manifesto-line">
-                        <span class="manifesto-arrow">→</span>
-                        <span class="manifesto-text">Order defeats entropy.</span>
-                    </div>
-                    <div class="manifesto-line">
-                        <span class="manifesto-arrow">→</span>
-                        <span class="manifesto-text">The best firewall is a trained mind.</span>
-                    </div>
-                    <div class="manifesto-line highlight">
-                        <span class="manifesto-arrow">→</span>
-                        <span class="manifesto-text">#BeAware</span>
-                    </div>
+            <div class="manifesto-card">
+                <div class="manifesto-label">// security.manifesto</div>
+                <div class="manifesto-line">
+                    <span class="manifesto-arrow">→</span>
+                    <span class="manifesto-text">Security is a process, not a product.</span>
+                </div>
+                <div class="manifesto-line">
+                    <span class="manifesto-arrow">→</span>
+                    <span class="manifesto-text">People are the perimeter.</span>
+                </div>
+                <div class="manifesto-line">
+                    <span class="manifesto-arrow">→</span>
+                    <span class="manifesto-text">Awareness is the first patch.</span>
+                </div>
+                <div class="manifesto-line">
+                    <span class="manifesto-arrow">→</span>
+                    <span class="manifesto-text">Order defeats entropy.</span>
+                </div>
+                <div class="manifesto-line">
+                    <span class="manifesto-arrow">→</span>
+                    <span class="manifesto-text">The best firewall is a trained mind.</span>
+                </div>
+                <div class="manifesto-line highlight">
+                    <span class="manifesto-arrow">→</span>
+                    <span class="manifesto-text">#BeAware</span>
                 </div>
             </div>
         </div>
@@ -1159,7 +1243,7 @@
 
     <!-- FOOTER -->
     <footer>
-        <span class="footer-left">© 2026 — Human-Centric Security Engineering</span>
+        <span class="footer-left">© 2026 — Valentina Segatti | Human-Centric Security Engineering</span>
         <span class="footer-right">#EngineeringAwareness · #BeAware</span>
     </footer>
 
@@ -1200,9 +1284,9 @@
                 navUl.style.right = '0';
                 navUl.style.flexDirection = 'column';
                 navUl.style.gap = '0';
-                navUl.style.background = 'rgba(255, 255, 255, 0.98)';
+                navUl.style.background = 'rgba(10, 14, 39, 0.98)';
                 navUl.style.backdropFilter = 'blur(12px)';
-                navUl.style.borderBottom = '1px solid rgba(226, 232, 240, 0.5)';
+                navUl.style.borderBottom = '1px solid rgba(45, 50, 80, 0.5)';
                 navUl.style.padding = '1rem 1.5rem';
                 navUl.style.zIndex = '99';
             }
@@ -1217,5 +1301,6 @@
     </script>
 </body>
 </html>
+
 
 
