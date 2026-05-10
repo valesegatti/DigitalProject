@@ -1,1512 +1,1895 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" data-theme="dark" data-lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentina Segatti - Human-Centric Security Engineering</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background: #0a0e27;
-            color: #f5f5f5;
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        /* LIGHT THEME */
-        body.light-mode {
-            background: #ffffff;
-            color: #0f172a;
-        }
-
-        body.light-mode nav {
-            background: rgba(255, 255, 255, 0.8);
-            border-bottom-color: rgba(226, 232, 240, 0.5);
-        }
-
-        body.light-mode nav.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        body.light-mode nav a {
-            color: #475569;
-        }
-
-        body.light-mode nav a:hover {
-            color: #6366f1;
-        }
-
-        body.light-mode .section-tag {
-            color: #10b981;
-        }
-
-        body.light-mode h2 {
-            color: #0f172a;
-        }
-
-        body.light-mode p {
-            color: #475569;
-        }
-
-        body.light-mode .pillar {
-            background: rgba(99, 102, 241, 0.05);
-            border-color: rgba(99, 102, 241, 0.2);
-        }
-
-        body.light-mode .pillar-text {
-            color: #475569;
-        }
-
-        body.light-mode #about {
-            background: #f8fafc;
-        }
-
-        body.light-mode .service-card {
-            background: white;
-            border-color: rgba(226, 232, 240, 0.6);
-        }
-
-        body.light-mode .service-card p {
-            color: #475569;
-        }
-
-        body.light-mode #journey {
-            background: #f8fafc;
-        }
-
-        body.light-mode .journey-step {
-            background: white;
-            border-color: rgba(226, 232, 240, 0.6);
-        }
-
-        body.light-mode .journey-step p {
-            color: #475569;
-        }
-
-        body.light-mode .feedback-card {
-            background: white;
-            border-color: rgba(226, 232, 240, 0.6);
-        }
-
-        body.light-mode .feedback-quote {
-            color: #475569;
-        }
-
-        body.light-mode .contact-box {
-            background: white;
-            border-color: rgba(226, 232, 240, 0.6);
-        }
-
-        body.light-mode .manifesto-card {
-            background: white;
-            border-color: rgba(226, 232, 240, 0.6);
-        }
-
-        body.light-mode .manifesto-line {
-            color: #475569;
-        }
-
-        body.light-mode footer {
-            background: #f8fafc;
-            border-top-color: rgba(226, 232, 240, 0.6);
-        }
-
-        body.light-mode .footer-left {
-            color: #94a3b8;
-        }
-
-        /* COLORS */
-        :root {
-            --bg-primary: #0a0e27;
-            --bg-secondary: #1a1f3a;
-            --text-primary: #f5f5f5;
-            --text-secondary: #a0a0a0;
-            --accent-indigo: #6366f1;
-            --accent-cyan: #06b6d4;
-            --accent-emerald: #10b981;
-            --border-light: #2d3250;
-        }
-
-        /* ANIMATIONS */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(24px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-32px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(32px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-80px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(4px); }
-        }
-
-        @keyframes scroll-carousel {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* NAV */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.5rem 4rem;
-            background: rgba(10, 14, 39, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(45, 50, 80, 0.5);
-            animation: slideDown 0.6s ease-out;
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(10, 14, 39, 0.95);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        nav .logo {
-            font-size: 16px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
-        }
-
-        nav a {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-decoration: none;
-            letter-spacing: 0.3px;
-            position: relative;
-            display: inline-block;
-            transition: color 0.3s ease;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: var(--accent-indigo);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--accent-indigo);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .theme-toggle, .lang-toggle {
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            color: var(--accent-indigo);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover, .lang-toggle:hover {
-            background: rgba(99, 102, 241, 0.2);
-            box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
-        }
-
-        .nav-mobile-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            cursor: pointer;
-            font-size: 20px;
-            padding: 0.5rem;
-        }
-
-        /* CONTAINER */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 4rem;
-        }
-
-        /* HERO */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 8rem 4rem 6rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-tag {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--accent-emerald);
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .hero-tag::before {
-            content: '';
-            display: inline-block;
-            width: 24px;
-            height: 2px;
-            background: var(--accent-emerald);
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 6vw, 4.2rem);
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -1px;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            max-width: 900px;
-            animation: fadeInUp 0.8s ease-out 0.15s both;
-        }
-
-        h1 .highlight {
-            background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.15rem;
-            font-weight: 400;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin-bottom: 0.5rem;
-            line-height: 1.8;
-            animation: fadeInUp 0.8s ease-out 0.3s both;
-        }
-
-        .hero-subtitle strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .hero-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--accent-indigo);
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease-out 0.45s both;
-            letter-spacing: 0.5px;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.25rem;
-            align-items: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
-        }
-
-        .btn {
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            display: inline-block;
-            border-radius: 8px;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .btn-primary {
-            color: white;
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 40px rgba(99, 102, 241, 0.5);
-        }
-
-        .btn-secondary {
-            color: var(--accent-indigo);
-            background: transparent;
-            border: 2px solid var(--accent-indigo);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(99, 102, 241, 0.1);
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .scroll-hint {
-            margin-top: 5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 12px;
-            color: var(--text-secondary);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            animation: fadeInUp 0.8s ease-out 0.75s both;
-        }
-
-        .scroll-hint span {
-            display: inline-block;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        /* SECTION DIVIDER */
-        .divider {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(45, 50, 80, 0.4), transparent);
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        body.light-mode .divider {
-            background: linear-gradient(90deg, transparent, rgba(226, 232, 240, 0.4), transparent);
-        }
-
-        /* ABOUT */
-        #about {
-            background: var(--bg-secondary);
-            position: relative;
-            z-index: 1;
-        }
-
-        .about-wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 8rem 4rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: start;
-        }
-
-        .about-left {
-            animation: slideInLeft 0.8s ease-out;
-        }
-
-        .about-right {
-            animation: slideInRight 0.8s ease-out 0.2s both;
-        }
-
-        .section-tag {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--accent-emerald);
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
-        }
-
-        h2 {
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
-            color: var(--text-primary);
-            margin-bottom: 2rem;
-        }
-
-        .pillars {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-            max-width: 100%;
-        }
-
-        .pillar {
-            padding: 2rem;
-            background: rgba(26, 31, 58, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .pillar:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
-        }
-
-        .pillar-label {
-            font-weight: 700;
-            color: var(--accent-indigo);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .pillar-text {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.8;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-
-        /* UVP */
-        #uvp {
-            position: relative;
-            z-index: 1;
-        }
-
-        .uvp-wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 8rem 4rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: start;
-        }
-
-        .uvp-left {
-            animation: slideInLeft 0.8s ease-out;
-        }
-
-        .uvp-right {
-            animation: slideInRight 0.8s ease-out 0.2s both;
-        }
-
-        .uvp-badge {
-            color: white;
-            background: var(--accent-indigo);
-            padding: 0.6rem 1.2rem;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            border-radius: 8px;
-        }
-
-        .uvp-left p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.8;
-            font-weight: 500;
-        }
-
-        blockquote {
-            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.6;
-            border-left: 4px solid var(--accent-indigo);
-            padding-left: 2rem;
-            margin-bottom: 2rem;
-            margin-left: 0;
-        }
-
-        blockquote .highlight {
-            background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .uvp-text {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.85;
-            margin-bottom: 1.5rem;
-        }
-
-        /* SERVICES */
-        #services {
-            position: relative;
-            z-index: 1;
-        }
-
-        .services-wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 8rem 4rem;
-        }
-
-        .services-header {
-            margin-bottom: 4rem;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .service-card {
-            padding: 2.5rem;
-            background: rgba(26, 31, 58, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            border-radius: 16px;
-            cursor: default;
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 0.6s ease-out both;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .service-card:nth-child(1) { animation-delay: 0.15s; }
-        .service-card:nth-child(2) { animation-delay: 0.25s; }
-        .service-card:nth-child(3) { animation-delay: 0.35s; }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-        }
-
-        .service-card.indigo::before {
-            background: var(--accent-indigo);
-        }
-
-        .service-card.emerald::before {
-            background: var(--accent-emerald);
-        }
-
-        .service-card.cyan::before {
-            background: var(--accent-cyan);
-        }
-
-        .service-num {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-num.indigo { color: var(--accent-indigo); }
-        .service-num.emerald { color: var(--accent-emerald); }
-        .service-num.cyan { color: var(--accent-cyan); }
-
-        .service-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .service-card p {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-tag {
-            display: inline-block;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .service-tag.indigo { color: var(--accent-indigo); }
-        .service-tag.emerald { color: var(--accent-emerald); }
-        .service-tag.cyan { color: var(--accent-cyan); }
-
-        /* JOURNEY */
-        #journey {
-            background: var(--bg-secondary);
-            position: relative;
-            z-index: 1;
-        }
-
-        .journey-wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 8rem 4rem;
-        }
-
-        .journey-steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-        }
-
-        .journey-step {
-            padding: 2rem;
-            background: rgba(26, 31, 58, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            border-radius: 12px;
-            text-align: center;
-            animation: fadeInUp 0.6s ease-out both;
-            transition: all 0.3s ease;
-        }
-
-        .journey-step:nth-child(1) { animation-delay: 0.1s; }
-        .journey-step:nth-child(2) { animation-delay: 0.2s; }
-        .journey-step:nth-child(3) { animation-delay: 0.3s; }
-        .journey-step:nth-child(4) { animation-delay: 0.4s; }
-
-        .journey-step:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
-        }
-
-        .journey-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent-indigo);
-            margin-bottom: 1rem;
-        }
-
-        .journey-step h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-        }
-
-        .journey-step p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 0;
-        }
-
-        /* FEEDBACK CAROUSEL */
-        #feedback {
-            position: relative;
-            z-index: 1;
-        }
-
-        .feedback-wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 8rem 4rem;
-        }
-
-        .carousel-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-        }
-
-        .carousel-track {
-            display: flex;
-            gap: 2rem;
-            animation: scroll-carousel 30s linear infinite;
-        }
-
-        .carousel-track:hover {
-            animation-play-state: paused;
-        }
-
-        .feedback-card {
-            flex: 0 0 calc(50% - 1rem);
-            padding: 2.5rem;
-            background: rgba(26, 31, 58, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .feedback-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
-        }
-
-        .stars {
-            display: flex;
-            gap: 0.25rem;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            color: var(--accent-indigo);
-        }
-
-        .feedback-quote {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-            font-style: italic;
-        }
-
-        .feedback-author {
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .feedback-role {
-            font-size: 0.85rem;
-            color: var(--accent-indigo);
-        }
-
-        /* CTA */
-        #cta {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 8rem 4rem;
-            text-align: center;
-        }
-
-        .cta-buttons-group {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
-        }
-
-        .contact-box {
-            flex: 0 0 calc(50% - 1rem);
-            max-width: 300px;
-            padding: 2.5rem;
-            background: rgba(26, 31, 58, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            border-radius: 12px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .contact-box:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
-            border-color: rgba(99, 102, 241, 0.3);
-        }
-
-        .contact-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact-label {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-value {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .manifesto-card {
-            padding: 2.5rem;
-            background: rgba(26, 31, 58, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            border-radius: 16px;
-            animation: fadeInUp 0.6s ease-out 0.2s both;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .manifesto-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--accent-indigo);
-            text-transform: uppercase;
-            margin-bottom: 1.75rem;
-            letter-spacing: 1px;
-        }
-
-        .manifesto-line {
-            display: flex;
-            gap: 1rem;
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.9;
-            margin-bottom: 1rem;
-            animation: slideInLeft 0.5s ease-out both;
-        }
-
-        .manifesto-line:nth-child(2) { animation-delay: 0.3s; }
-        .manifesto-line:nth-child(3) { animation-delay: 0.4s; }
-        .manifesto-line:nth-child(4) { animation-delay: 0.5s; }
-        .manifesto-line:nth-child(5) { animation-delay: 0.6s; }
-        .manifesto-line:nth-child(6) { animation-delay: 0.7s; }
-        .manifesto-line:nth-child(7) { animation-delay: 0.8s; }
-
-        .manifesto-arrow {
-            color: var(--accent-emerald);
-            font-weight: 700;
-            user-select: none;
-        }
-
-        .manifesto-text {
-            font-weight: 500;
-        }
-
-        .manifesto-line.highlight .manifesto-text {
-            color: var(--accent-emerald);
-            font-weight: 700;
-        }
-
-        /* FOOTER */
-        footer {
-            border-top: 1px solid rgba(45, 50, 80, 0.6);
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 4rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-            background: var(--bg-secondary);
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        .footer-left {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            letter-spacing: 0.3px;
-        }
-
-        .footer-right {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--accent-indigo);
-            letter-spacing: 0.3px;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 900px) {
-            nav {
-                padding: 1rem 1.5rem;
-            }
-
-            nav ul {
-                display: none;
-            }
-
-            .nav-mobile-btn {
-                display: block;
-            }
-
-            #hero {
-                padding: 7rem 1.5rem 4rem;
-            }
-
-            .about-wrap,
-            .uvp-wrap,
-            .cta-wrap {
-                grid-template-columns: 1fr !important;
-                gap: 2rem !important;
-                padding: 4rem 1.5rem !important;
-            }
-
-            .services-wrap,
-            .journey-wrap,
-            .feedback-wrap {
-                padding: 4rem 1.5rem !important;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr !important;
-                gap: 1.5rem !important;
-            }
-
-            .journey-steps {
-                grid-template-columns: 1fr !important;
-                gap: 1.5rem !important;
-            }
-
-            .pillars {
-                grid-template-columns: 1fr !important;
-            }
-
-            .cta-buttons-group {
-                flex-direction: column;
-            }
-
-            .contact-box {
-                flex: 0 0 100%;
-                max-width: 100%;
-            }
-
-            .feedback-card {
-                flex: 0 0 100%;
-            }
-
-            footer {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-                padding: 2rem 1.5rem;
-            }
-
-            .container {
-                padding: 0 1.5rem;
-            }
-
-            h1 {
-                font-size: clamp(2rem, 5vw, 3rem);
-            }
-
-            h2 {
-                font-size: clamp(1.5rem, 3vw, 2rem);
-            }
-
-            .nav-right {
-                gap: 0.75rem;
-            }
-
-            .theme-toggle, .lang-toggle {
-                padding: 0.4rem 0.8rem;
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .cta-buttons {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            .feedback-card {
-                flex: 0 0 100%;
-            }
-
-            .nav-left {
-                gap: 1rem;
-            }
-
-            nav .logo {
-                font-size: 14px;
-            }
-
-            nav ul {
-                gap: 1.5rem;
-            }
-        }
-
-        /* Hidden content for language switching */
-        .lang-en { display: none; }
-        .lang-it { display: block; }
-
-        body.lang-en .lang-en { display: block; }
-        body.lang-en .lang-it { display: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentina Segatti — Human-Centric Security Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   THEME TOKENS — swap on [data-theme]
+═══════════════════════════════════════════ */
+:root {
+  --bg0: #07090f;
+  --bg1: #0d1117;
+  --bg2: #131924;
+  --bg3: #1a2235;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --border-accent: rgba(56,189,248,0.3);
+  --text1: #f0f4ff;
+  --text2: #8b97b5;
+  --text3: #4a5568;
+  --cyan: #38bdf8;
+  --cyan-dim: rgba(56,189,248,0.15);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.15);
+  --indigo: #818cf8;
+  --indigo-dim: rgba(129,140,248,0.15);
+  --card-glow: rgba(56,189,248,0.08);
+  --nav-bg: rgba(7,9,15,0.85);
+  --shadow: rgba(0,0,0,0.5);
+}
+
+[data-theme="light"] {
+  --bg0: #f0f4ff;
+  --bg1: #f8faff;
+  --bg2: #eef2ff;
+  --bg3: #e4eaff;
+  --surface: rgba(0,0,0,0.03);
+  --surface-hover: rgba(0,0,0,0.06);
+  --border: rgba(0,0,0,0.09);
+  --border-accent: rgba(56,189,248,0.4);
+  --text1: #0d1117;
+  --text2: #4a5568;
+  --text3: #94a3b8;
+  --cyan: #0284c7;
+  --cyan-dim: rgba(2,132,199,0.1);
+  --green: #059669;
+  --green-dim: rgba(5,150,105,0.1);
+  --indigo: #4f46e5;
+  --indigo-dim: rgba(79,70,229,0.1);
+  --card-glow: rgba(2,132,199,0.05);
+  --nav-bg: rgba(240,244,255,0.9);
+  --shadow: rgba(0,0,0,0.12);
+}
+
+/* ═══════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg0);
+  color: var(--text1);
+  line-height: 1.7;
+  overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor-dot {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: var(--cyan);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease, opacity 0.3s;
+}
+.cursor-ring {
+  position: fixed;
+  width: 28px; height: 28px;
+  border: 1.5px solid var(--cyan);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.18s ease, width 0.2s, height 0.2s, opacity 0.3s;
+  opacity: 0.5;
+}
+.cursor-ring.hovered { width: 44px; height: 44px; opacity: 0.3; }
+
+/* SCROLL PROGRESS */
+.scroll-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--cyan), var(--indigo));
+  z-index: 200;
+  transition: width 0.05s linear;
+}
+
+/* ═══════════════════════════════════════════
+   NOISE TEXTURE OVERLAY
+═══════════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* GRID LINES */
+.grid-overlay {
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+  z-index: 0;
+}
+[data-theme="light"] .grid-overlay {
+  background-image:
+    linear-gradient(rgba(2,132,199,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(2,132,199,0.05) 1px, transparent 1px);
+}
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3.5rem;
+  height: 64px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+nav.scrolled {
+  height: 56px;
+  box-shadow: 0 8px 32px var(--shadow);
+}
+
+.nav-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cyan);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.nav-links {
+  display: flex; gap: 2rem; list-style: none;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--cyan);
+  transition: width 0.25s ease;
+}
+.nav-links a:hover { color: var(--cyan); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-controls {
+  display: flex; align-items: center; gap: 0.75rem;
+}
+
+.toggle-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  cursor: none;
+  transition: all 0.2s;
+}
+.toggle-btn:hover {
+  border-color: var(--border-accent);
+  color: var(--cyan);
+  background: var(--cyan-dim);
+}
+
+.mobile-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text1);
+  cursor: none;
+  font-size: 20px;
+  padding: 0.5rem;
+}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 8rem 3.5rem 5rem;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Animated glow blobs */
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: drift 10s ease-in-out infinite alternate;
+}
+.blob1 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(56,189,248,0.12), transparent 70%);
+  top: 10%; right: 5%;
+  animation-delay: 0s;
+}
+.blob2 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(245,158,11,0.08), transparent 70%);
+  bottom: 20%; left: 10%;
+  animation-delay: -4s;
+}
+@keyframes drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(20px, -30px) scale(1.1); }
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 1.75rem;
+  display: flex; align-items: center; gap: 0.75rem;
+  animation: fadeUp 0.7s ease both;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 28px; height: 1.5px;
+  background: var(--green);
+  display: inline-block;
+}
+
+h1.hero-title {
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text1);
+  margin-bottom: 1.5rem;
+  max-width: 860px;
+  animation: fadeUp 0.7s ease 0.1s both;
+}
+h1.hero-title .accent { color: var(--cyan); }
+
+.hero-sub {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--text2);
+  max-width: 600px;
+  margin-bottom: 2.75rem;
+  animation: fadeUp 0.7s ease 0.2s both;
+}
+.hero-sub strong { color: var(--text1); font-weight: 600; }
+
+.hero-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--indigo);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+  animation: fadeUp 0.7s ease 0.25s both;
+}
+
+.hero-hashtag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: 0.12em;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.7s ease 0.3s both;
+}
+
+.hero-ctas {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  animation: fadeUp 0.7s ease 0.35s both;
+}
+
+.btn-primary {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  background: var(--cyan);
+  color: var(--bg0);
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.25s;
+  cursor: none;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 32px rgba(56,189,248,0.35);
+}
+[data-theme="light"] .btn-primary { color: #fff; }
+
+.btn-ghost {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  background: var(--surface);
+  color: var(--text2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.25s;
+  cursor: none;
+}
+.btn-ghost:hover {
+  border-color: var(--border-accent);
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  transform: translateY(-2px);
+}
+
+.scroll-hint {
+  margin-top: 4.5rem;
+  display: flex; align-items: center; gap: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text3);
+  animation: fadeUp 0.7s ease 0.5s both;
+}
+.scroll-hint .line {
+  width: 40px; height: 1px;
+  background: var(--text3);
+  position: relative; overflow: hidden;
+}
+.scroll-hint .line::after {
+  content: '';
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: var(--cyan);
+  animation: scanline 2.5s ease-in-out infinite;
+}
+@keyframes scanline { 0%{left:-100%} 60%{left:100%} 100%{left:100%} }
+
+/* ═══════════════════════════════════════════
+   SECTION COMMON
+═══════════════════════════════════════════ */
+.section-wrap {
+  position: relative; z-index: 1;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 7rem 3.5rem;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 0.75rem;
+}
+
+h2.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--text1);
+  margin-bottom: 2.5rem;
+}
+
+.divider {
+  position: relative; z-index: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════
+   ABOUT — redesigned profile card
+═══════════════════════════════════════════ */
+#about { background: var(--bg1); position: relative; z-index: 1; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.about-text p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text2);
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+.about-text p strong { color: var(--text1); font-weight: 600; }
+
+.pillars {
+  display: grid; grid-template-columns: 1fr;
+  gap: 1rem; margin-top: 2.5rem;
+}
+.pillar {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--cyan);
+  border-radius: 0 10px 10px 0;
+  transition: background 0.2s, border-color 0.2s;
+}
+.pillar:hover { background: var(--surface-hover); border-color: var(--border-accent); }
+
+.pillar-icon {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  white-space: nowrap;
+  padding-top: 2px;
+  min-width: 80px;
+}
+.pillar-body h4 {
+  font-size: 0.95rem; font-weight: 700;
+  color: var(--text1); margin-bottom: 0.25rem;
+}
+.pillar-body p {
+  font-size: 0.875rem;
+  color: var(--text2);
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+/* ── IDENTITY CARD ── */
+.identity-card {
+  border-radius: 20px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: sticky;
+  top: 88px;
+}
+
+.card-header {
+  background: linear-gradient(135deg, var(--bg3), var(--bg2));
+  padding: 2.5rem 2rem 1.5rem;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* decorative corner circuit lines */
+.card-header::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 120px; height: 120px;
+  border-right: 1px solid var(--border-accent);
+  border-top: 1px solid var(--border-accent);
+  border-radius: 0 20px 0 0;
+  opacity: 0.5;
+}
+
+.avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 72px; height: 72px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--cyan), var(--indigo));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.avatar-ring {
+  position: absolute; inset: -4px;
+  border-radius: 20px;
+  border: 1px solid var(--border-accent);
+  animation: pulse-ring 3s ease-in-out infinite;
+}
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 0.8; transform: scale(1.02); }
+}
+
+.status-dot {
+  position: absolute;
+  bottom: 2px; right: 2px;
+  width: 12px; height: 12px;
+  background: var(--green);
+  border-radius: 50%;
+  border: 2px solid var(--bg2);
+  animation: blink-dot 2.5s ease-in-out infinite;
+}
+@keyframes blink-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.card-identity h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text1);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.2rem;
+}
+.card-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 0.6rem;
+}
+.card-status {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 11px;
+  color: var(--green);
+  background: var(--green-dim);
+  border: 1px solid rgba(52,211,153,0.25);
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.card-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: blink-dot 2s infinite;
+}
+
+/* card body */
+.card-body { padding: 1.5rem 2rem; }
+
+.card-section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 1rem;
+}
+
+.skill-list {
+  display: flex; flex-direction: column; gap: 0.85rem;
+  margin-bottom: 1.75rem;
+}
+
+.skill-row {
+  display: flex; flex-direction: column; gap: 0.35rem;
+}
+.skill-top {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.skill-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text1);
+}
+.skill-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+}
+.skill-bar-bg {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--indigo));
+  transform-origin: left;
+  animation: bar-grow 1.2s cubic-bezier(0.4,0,0.2,1) both;
+}
+@keyframes bar-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.skill-bar-fill.s1 { animation-delay: 0.2s; }
+.skill-bar-fill.s2 { animation-delay: 0.35s; }
+.skill-bar-fill.s3 { animation-delay: 0.5s; }
+
+.card-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 1.25rem 0;
+}
+
+/* terminal block inside card */
+.mini-terminal {
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+.term-dots {
+  display: flex; gap: 5px; margin-bottom: 0.75rem;
+}
+.td { width: 8px; height: 8px; border-radius: 50%; }
+.td-r { background: #ff5f56; }
+.td-y { background: #ffbd2e; }
+.td-g { background: #27c93f; }
+
+.term-line {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.9;
+  color: var(--text2);
+}
+.tk { color: var(--cyan); }
+.tv { color: var(--green); }
+.tc { color: var(--text3); }
+
+/* ═══════════════════════════════════════════
+   UVP
+═══════════════════════════════════════════ */
+#uvp { background: var(--bg0); position: relative; z-index: 1; }
+
+.uvp-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.uvp-aside {
+  display: flex; flex-direction: column; gap: 0.75rem;
+}
+.uvp-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bg0);
+  background: var(--cyan);
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  display: inline-block;
+  width: fit-content;
+}
+.uvp-aside-text {
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+.uvp-quote {
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-weight: 700;
+  color: var(--text1);
+  line-height: 1.55;
+  border-left: 2.5px solid var(--cyan);
+  padding-left: 1.75rem;
+  margin-bottom: 2rem;
+}
+.uvp-quote em { font-style: normal; color: var(--cyan); }
+
+.uvp-body p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text2);
+  line-height: 1.9;
+  margin-bottom: 1.25rem;
+}
+
+/* ═══════════════════════════════════════════
+   SERVICES
+═══════════════════════════════════════════ */
+#services { background: var(--bg1); position: relative; z-index: 1; }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px;
+  background: var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.svc-card {
+  background: var(--bg1);
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.svc-card:hover { background: var(--bg2); }
+
+.svc-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.svc-card:hover::before { transform: scaleX(1); }
+.svc-card.c-cyan::before  { background: var(--cyan); }
+.svc-card.c-green::before { background: var(--green); }
+.svc-card.c-indigo::before{ background: var(--indigo); }
+
+.svc-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--text3);
+  margin-bottom: 1.5rem;
+}
+
+.svc-icon-wrap {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--border);
+}
+.svc-card.c-cyan .svc-icon-wrap   { background: var(--cyan-dim); border-color: rgba(56,189,248,0.2); }
+.svc-card.c-green .svc-icon-wrap  { background: var(--green-dim); border-color: rgba(52,211,153,0.2); }
+.svc-card.c-indigo .svc-icon-wrap { background: var(--indigo-dim); border-color: rgba(129,140,248,0.2); }
+
+.svc-icon-wrap svg { width: 22px; height: 22px; stroke-width: 1.75; fill: none; }
+.svc-card.c-cyan   .svc-icon-wrap svg { stroke: var(--cyan); }
+.svc-card.c-green  .svc-icon-wrap svg { stroke: var(--green); }
+.svc-card.c-indigo .svc-icon-wrap svg { stroke: var(--indigo); }
+
+.svc-card h3 {
+  font-size: 1rem; font-weight: 700;
+  color: var(--text1);
+  margin-bottom: 0.75rem;
+}
+.svc-card p {
+  font-size: 0.875rem;
+  color: var(--text2);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+.svc-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  opacity: 0.7;
+}
+.svc-card.c-cyan   .svc-tag { color: var(--cyan); }
+.svc-card.c-green  .svc-tag { color: var(--green); }
+.svc-card.c-indigo .svc-tag { color: var(--indigo); }
+
+/* ═══════════════════════════════════════════
+   JOURNEY
+═══════════════════════════════════════════ */
+#journey { background: var(--bg0); position: relative; z-index: 1; }
+
+.journey-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.journey-step {
+  background: var(--bg0);
+  padding: 2rem 1.5rem;
+  position: relative;
+  transition: background 0.3s;
+}
+.journey-step:hover { background: var(--bg2); }
+
+.step-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--border);
+  line-height: 1;
+  margin-bottom: 1rem;
+  transition: color 0.3s;
+}
+.journey-step:hover .step-num { color: var(--cyan); }
+
+.journey-step h4 {
+  font-size: 0.95rem; font-weight: 700;
+  color: var(--text1); margin-bottom: 0.5rem;
+}
+.journey-step p {
+  font-size: 0.85rem;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════
+   FEEDBACK CAROUSEL
+═══════════════════════════════════════════ */
+#feedback { background: var(--bg1); position: relative; z-index: 1; }
+
+.carousel-mask {
+  overflow: hidden;
+  position: relative;
+}
+.carousel-mask::before, .carousel-mask::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+.carousel-mask::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg1), transparent);
+}
+.carousel-mask::after {
+  right: 0;
+  background: linear-gradient(-90deg, var(--bg1), transparent);
+}
+
+.carousel-track {
+  display: flex; gap: 1.5rem;
+  animation: scroll-x 30s linear infinite;
+  width: max-content;
+}
+.carousel-track:hover { animation-play-state: paused; }
+@keyframes scroll-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.fb-card {
+  width: 320px; flex-shrink: 0;
+  padding: 2rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.fb-card:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-3px);
+}
+.stars { color: var(--cyan); font-size: 13px; letter-spacing: 0.15em; margin-bottom: 1rem; }
+.fb-quote {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--text2);
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+.fb-author { font-size: 0.9rem; font-weight: 700; color: var(--text1); }
+.fb-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--indigo);
+  margin-top: 0.15rem;
+}
+
+/* ═══════════════════════════════════════════
+   CTA
+═══════════════════════════════════════════ */
+#cta { background: var(--bg0); position: relative; z-index: 1; }
+
+.cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.cta-text p {
+  font-size: 1rem;
+  color: var(--text2);
+  margin-bottom: 2rem;
+  line-height: 1.85;
+}
+
+.contact-cards {
+  display: flex; gap: 1rem;
+}
+.contact-card {
+  flex: 1;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  text-align: center;
+  transition: all 0.25s;
+}
+.contact-card:hover {
+  border-color: var(--border-accent);
+  background: var(--cyan-dim);
+  transform: translateY(-3px);
+}
+.contact-card-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--cyan-dim);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0.25rem;
+}
+.contact-card-icon svg { width: 20px; height: 20px; stroke: var(--cyan); stroke-width: 1.75; fill: none; }
+.contact-card-label { font-size: 0.9rem; font-weight: 700; color: var(--text1); }
+.contact-card-sub { font-size: 0.8rem; color: var(--text2); }
+
+/* manifesto */
+.manifesto {
+  padding: 2rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.manifesto-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 1.5rem;
+}
+.mline {
+  display: flex; gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  color: var(--text2);
+  margin-bottom: 0.85rem;
+  line-height: 1.6;
+}
+.mline-arrow {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--green);
+  flex-shrink: 0;
+  font-size: 12px;
+  margin-top: 2px;
+}
+.mline-text { font-weight: 500; }
+.mline.highlight .mline-text { color: var(--green); font-weight: 700; }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer {
+  position: relative; z-index: 1;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 2.25rem 3.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid var(--border);
+}
+.footer-copy {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+}
+.footer-tags {
+  font-size: 11px;
+  color: var(--cyan);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SKILL TAGS (replaces skill-list bars) ── */
+.skill-tags {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+.skill-tag-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  border: 1px solid rgba(56,189,248,0.22);
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  transition: background 0.2s, border-color 0.2s;
+}
+[data-theme="light"] .skill-tag-pill {
+  border-color: rgba(2,132,199,0.3);
+}
+.skill-tag-pill:hover {
+  background: rgba(56,189,248,0.22);
+  border-color: rgba(56,189,248,0.4);
+}
+
+/* ── RESILIENCE BAR ── */
+.resilience-block {
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+}
+.resilience-label-row {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 0.5rem;
+}
+.resilience-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--text3);
+}
+.resilience-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0.05em;
+}
+.resilience-bar-bg {
+  height: 5px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.resilience-bar-fill {
+  height: 100%;
+  width: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+  animation: bar-grow 1.4s cubic-bezier(0.4,0,0.2,1) 0.3s both;
+}
+
+/* ═══════════════════════════════════
+   GRAPHIC OVERHAUL — diagonal stripe, amber accent, new card look
+═══════════════════════════════════ */
+
+/* Diagonal stripe behind hero */
+#hero::after {
+  content: '';
+  position: absolute;
+  top: -10%; right: -5%;
+  width: 55%; height: 130%;
+  background: linear-gradient(135deg,
+    rgba(251,191,36,0.03) 0%,
+    rgba(56,189,248,0.04) 50%,
+    transparent 100%);
+  transform: skewX(-12deg);
+  pointer-events: none;
+  z-index: 0;
+}
+#hero > *:not(.glow-blob) { position: relative; z-index: 1; }
+
+/* Nav: pill-style active indicator on logo */
+.nav-logo {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.nav-logo::after {
+  content: '●';
+  font-size: 7px;
+  color: var(--green);
+  animation: blink-dot 2s ease-in-out infinite;
+}
+
+/* Hero eyebrow: add amber shimmer tag */
+.hero-eyebrow-wrap {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.amber-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #f59e0b;
+  background: rgba(245,158,11,0.1);
+  border: 1px solid rgba(245,158,11,0.25);
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+}
+
+/* Hashtag pill style */
+.hero-hashtag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--green);
+  background: var(--green-dim);
+  border: 1px solid rgba(52,211,153,0.2);
+  padding: 0.3rem 0.85rem;
+  border-radius: 20px;
+  letter-spacing: 0.12em;
+  margin-bottom: 2rem;
+}
+
+/* Identity card: amber corner accent */
+.card-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 60px; height: 60px;
+  border-right: 1px solid rgba(245,158,11,0.2);
+  border-bottom: 1px solid rgba(245,158,11,0.2);
+  border-radius: 0 0 20px 0;
+  pointer-events: none;
+}
+
+/* Avatar: amber gradient variant */
+.avatar {
+  background: linear-gradient(135deg, #f59e0b 0%, var(--cyan) 100%) !important;
+}
+.avatar-ring {
+  border-color: rgba(245,158,11,0.35) !important;
+}
+
+/* Card body: tighter, more refined */
+.card-body { padding: 1.25rem 1.75rem 1.5rem; }
+
+/* Mini-terminal: amber prompt */
+.mini-terminal { background: var(--bg0); }
+.term-dots .td-r { background: #f59e0b; }
+
+/* Section label: amber left-dash */
+.section-label {
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.section-label::before {
+  content: '';
+  width: 18px; height: 1.5px;
+  background: var(--cyan);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* UVP quote border: amber */
+.uvp-quote { border-left-color: #f59e0b; }
+.uvp-quote em { color: #f59e0b; }
+
+/* Service cards: amber number on first */
+.svc-card.c-cyan .svc-num  { color: #f59e0b; }
+.svc-card.c-cyan::before   { background: linear-gradient(90deg, #f59e0b, var(--cyan)); }
+
+/* Journey step numbers: amber on hover */
+.journey-step:hover .step-num { color: #f59e0b !important; }
+.journey-step:nth-child(1):hover .step-num { color: var(--cyan) !important; }
+.journey-step:nth-child(4):hover .step-num { color: var(--green) !important; }
+
+/* Manifesto highlight: amber instead of green */
+.mline.highlight .mline-text { color: #f59e0b !important; }
+.mline-arrow { color: #f59e0b; }
+
+/* Footer: subtle gradient border top */
+footer { border-top-color: transparent;
+  border-image: linear-gradient(90deg, transparent, var(--border), rgba(245,158,11,0.15), var(--border), transparent) 1;
+}
+.footer-tags { color: #f59e0b; }
+
+/* Btn-primary: amber shimmer on hover */
+.btn-primary:hover {
+  box-shadow: 0 0 28px rgba(245,158,11,0.25), 0 0 48px rgba(56,189,248,0.2);
+}
+
+/* ═══════════════════════════════════════════
+   LANGUAGE SYSTEM
+═══════════════════════════════════════════ */
+[data-lang="it"] [lang="en"] { display: none; }
+[data-lang="en"] [lang="it"] { display: none; }
+[lang="it"], [lang="en"] { display: block; }
+span[lang="it"], span[lang="en"] { display: inline; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 960px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .mobile-btn { display: block; }
+  #hero { padding: 7rem 1.5rem 4rem; }
+  .section-wrap { padding: 5rem 1.5rem; }
+  .about-grid, .uvp-grid, .cta-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .services-grid, .journey-steps { grid-template-columns: 1fr; }
+  .identity-card { position: static; }
+  footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  .contact-cards { flex-direction: column; }
+  .uvp-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .hero-ctas { flex-direction: column; }
+  .btn-primary, .btn-ghost { text-align: center; width: 100%; }
+}
+</style>
 </head>
 <body>
-    <!-- NAV -->
-    <nav id="navbar">
-        <div class="nav-left">
-            <a href="#hero" class="logo">VALENTINA SEGATTI</a>
-            <ul>
-                <li><a href="#about" class="lang-it">Metodo</a><a href="#about" class="lang-en">Method</a></li>
-                <li><a href="#uvp" class="lang-it">Approccio</a><a href="#uvp" class="lang-en">Approach</a></li>
-                <li><a href="#services" class="lang-it">Servizi</a><a href="#services" class="lang-en">Services</a></li>
-                <li><a href="#journey" class="lang-it">Percorso</a><a href="#journey" class="lang-en">Journey</a></li>
-                <li><a href="#cta" class="lang-it">Contatti</a><a href="#cta" class="lang-en">Connect</a></li>
-            </ul>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scroll-bar" id="scrollBar"></div>
+<div class="grid-overlay"></div>
+
+<!-- ── NAV ── -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">VS <span style="opacity:.4">/ SEC_ENG</span></a>
+
+  <ul class="nav-links">
+    <li><a href="#about"><span lang="it">Metodo</span><span lang="en">Method</span></a></li>
+    <li><a href="#uvp"><span lang="it">Approccio</span><span lang="en">Approach</span></a></li>
+    <li><a href="#services"><span lang="it">Servizi</span><span lang="en">Services</span></a></li>
+    <li><a href="#journey"><span lang="it">Percorso</span><span lang="en">Journey</span></a></li>
+    <li><a href="#cta"><span lang="it">Contatti</span><span lang="en">Connect</span></a></li>
+  </ul>
+
+  <div class="nav-controls">
+    <button class="toggle-btn" id="langBtn">EN / IT</button>
+    <button class="toggle-btn" id="themeBtn">
+      <span id="themeIcon">☀️</span>
+    </button>
+  </div>
+  <button class="mobile-btn" id="mobileBtn">☰</button>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="blob1 glow-blob"></div>
+  <div class="blob2 glow-blob"></div>
+
+  <div class="hero-eyebrow-wrap">
+    <div class="hero-eyebrow">
+      <span lang="it">Ingegneria Elettronica · Cybersecurity</span>
+      <span lang="en">Electronic Engineering · Cybersecurity</span>
+    </div>
+    <span class="amber-tag">#BeAware</span>
+  </div>
+
+  <h1 class="hero-title">
+    <span lang="it">Proteggere i Dati attraverso<br>l'Ingegneria <span class="accent">Human-Centric</span></span>
+    <span lang="en">Protecting Data through<br><span class="accent">Human-Centric</span> Engineering</span>
+  </h1>
+
+  <p class="hero-sub">
+    <span lang="it">Colmare il divario tra sistemi elettronici complessi e consapevolezza umana.<br>Perché <strong>il firewall più forte è una mente consapevole.</strong></span>
+    <span lang="en">Bridging the gap between complex electronic systems and human awareness.<br>Because <strong>the strongest firewall is a trained mind.</strong></span>
+  </p>
+
+  <div class="hero-ctas">
+    <a href="#cta" class="btn-primary">
+      <span lang="it">Contattami</span>
+      <span lang="en">Connect with Me</span>
+    </a>
+    <a href="#services" class="btn-ghost">
+      <span lang="it">Visualizza Servizi</span>
+      <span lang="en">View Services</span>
+    </a>
+  </div>
+
+  <div class="scroll-hint">
+    <span class="line"></span>
+    <span lang="it">Scorri per esplorare</span>
+    <span lang="en">Scroll to explore</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="about-grid">
+
+      <div class="about-text">
+        <div class="section-label">
+          <span lang="it">// 01 — il metodo</span>
+          <span lang="en">// 01 — the method</span>
         </div>
-        <div class="nav-right">
-            <button class="lang-toggle" id="langToggle">EN / IT</button>
-            <button class="theme-toggle" id="themeToggle">🌙</button>
+        <h2 class="section-title">
+          <span lang="it">Ordine. Metodologia.<br>Leadership.</span>
+          <span lang="en">Order. Methodology.<br>Leadership.</span>
+        </h2>
+
+        <p>
+          <span lang="it">Il mio percorso è insolito per design. Come <strong>Direttore della pubblicazione scolastica</strong>, ho imparato che il problema di ingegneria più difficile non è tecnico — è la comunicazione. Scomporre sistemi complessi in chiarezza che muove le persone all'azione.</span>
+          <span lang="en">My path is unconventional by design. As <strong>Editor-in-Chief of my school publication</strong>, I learned early that the hardest engineering problem isn't technical — it's communication. Breaking down complex systems into clarity that moves people to act.</span>
+        </p>
+        <p>
+          <span lang="it">Come <strong>tutor</strong>, ho affinato lo strumento di sicurezza più sottovalutato: la comprensione umana. L'<strong>Ingegneria Elettronica</strong> mi ha dato il framework analitico — precisione a livello di circuito, integrità del segnale, pensiero sistemico.</span>
+          <span lang="en">As a <strong>tutor</strong>, I refined the most underestimated security tool in existence: human understanding. <strong>Electronic Engineering</strong> gave me the analytical framework — circuit-level precision, signal integrity, systems thinking.</span>
+        </p>
+        <p>
+          <span lang="it">Insieme, queste discipline formano una sola filosofia: <strong>la sicurezza non si installa, si comprende.</strong></span>
+          <span lang="en">Together, these disciplines form a single philosophy: <strong>security is not installed, it is understood.</strong></span>
+        </p>
+
+        <div class="pillars">
+          <div class="pillar">
+            <div class="pillar-icon">01 —</div>
+            <div class="pillar-body">
+              <h4><span lang="it">Ordine</span><span lang="en">Order</span></h4>
+              <p><span lang="it">Pensiero strutturato da schemi hardware a policy di sicurezza. Il caos è l'avversario.</span><span lang="en">Structured thinking from hardware schematics to security policies. Chaos is the adversary.</span></p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">02 —</div>
+            <div class="pillar-body">
+              <h4><span lang="it">Metodologia</span><span lang="en">Methodology</span></h4>
+              <p><span lang="it">Audit sistematici, processi documentati e framework di sicurezza riproducibili.</span><span lang="en">Systematic auditing, documented processes, and reproducible security frameworks.</span></p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">03 —</div>
+            <div class="pillar-body">
+              <h4><span lang="it">Leadership</span><span lang="en">Leadership</span></h4>
+              <p><span lang="it">La cultura della sicurezza inizia dall'alto e si diffonde in ogni nodo umano della rete.</span><span lang="en">Security culture starts at the top and spreads through every human node in the network.</span></p>
+            </div>
+          </div>
         </div>
-        <button class="nav-mobile-btn" id="mobileMenuBtn">☰</button>
-    </nav>
+      </div><!-- /about-text -->
 
-    <!-- HERO -->
-    <section id="hero">
-        <div class="hero-tag"><span class="lang-it">🔐 Ingegneria Elettronica · Cybersecurity</span><span class="lang-en">🔐 Electronic Engineering · Cybersecurity</span></div>
-        <h1><span class="lang-it">Proteggere i Dati attraverso l'Ingegneria <span class="highlight">Human-Centric</span></span><span class="lang-en">Protecting Data through <span class="highlight">Human-Centric</span><br>Engineering</span></h1>
-        <p class="hero-subtitle"><span class="lang-it">Colmare il divario tra sistemi elettronici complessi e consapevolezza umana.<br>Perché <strong>il firewall più forte è una mente consapevole.</strong></span><span class="lang-en">Bridging the gap between complex electronic systems and human awareness.<br>Because <strong>the strongest firewall is a trained mind.</strong></span></p>
-        <p class="hero-name">👋 Valentina Segatti</p>
-        <div class="cta-buttons">
-            <a href="#cta" class="btn btn-primary"><span class="lang-it">Contattami</span><span class="lang-en">Connect with Me</span></a>
-            <a href="#services" class="btn btn-secondary"><span class="lang-it">Visualizza Servizi</span><span class="lang-en">View Services</span></a>
+      <!-- ── IDENTITY CARD ── -->
+      <div class="identity-card">
+        <div class="card-header">
+          <div class="avatar-wrap">
+            <div class="avatar-ring"></div>
+            <div class="avatar">VS</div>
+            <div class="status-dot"></div>
+          </div>
+          <div class="card-identity">
+            <h3>Valentina Segatti</h3>
+            <div class="card-role">
+              <span lang="it">Ingegnere Cybersecurity</span>
+              <span lang="en">Cybersecurity Engineer</span>
+            </div>
+            <div class="card-status">
+              <span lang="it">Disponibile per collaborazioni</span>
+              <span lang="en">Open to Connect</span>
+            </div>
+          </div>
         </div>
-        <div class="scroll-hint">
-            <span>↓</span>
-            <span class="lang-it">Scorri per esplorare</span><span class="lang-en">Scroll to explore</span>
+
+        <div class="card-body">
+          <div class="card-section-label">
+            <span lang="it">Competenze chiave</span>
+            <span lang="en">Core Skills</span>
+          </div>
+
+          <div class="skill-tags">
+            <span class="skill-tag-pill">
+              <span lang="it">Ingegneria Elettronica</span>
+              <span lang="en">Electronic Engineering</span>
+            </span>
+            <span class="skill-tag-pill">
+              <span lang="it">Coaching sulla Sicurezza</span>
+              <span lang="en">Security Coaching</span>
+            </span>
+            <span class="skill-tag-pill">
+              <span lang="it">Comunicazione Tecnica</span>
+              <span lang="en">Technical Communication</span>
+            </span>
+          </div>
+          <div class="resilience-block">
+            <div class="resilience-label-row">
+              <span class="resilience-key">resilience_score</span>
+              <span class="resilience-val">100%</span>
+            </div>
+            <div class="resilience-bar-bg">
+              <div class="resilience-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="card-divider"></div>
+          <div class="card-section-label">
+            <span lang="it">Approccio</span>
+            <span lang="en">Approach</span>
+          </div>
+
+          <div class="mini-terminal">
+            <div class="term-dots">
+              <div class="td td-r"></div>
+              <div class="td td-y"></div>
+              <div class="td td-g"></div>
+            </div>
+            <div class="term-line"><span class="tc">// threat_model</span></div>
+            <div class="term-line"><span class="tk">hardware</span>  → <span class="tv">SECURED</span></div>
+            <div class="term-line"><span class="tk">process  </span>  → <span class="tv">AUDITED</span></div>
+            <div class="term-line"><span class="tk">people   </span>  → <span class="tv">TRAINED</span></div>
+            <div class="term-line" style="margin-top:.5rem"><span class="tk">resilience</span> <span style="color:var(--text3)">:</span> <span class="tv">100%</span></div>
+          </div>
+
         </div>
-    </section>
+      </div><!-- /identity-card -->
 
-    <div class="divider"></div>
+    </div><!-- /about-grid -->
+  </div>
+</section>
 
-    <!-- ABOUT -->
-    <section id="about">
-        <div class="about-wrap">
-            <div class="about-left">
-                <div class="section-tag"><span class="lang-it">// 01 — il metodo</span><span class="lang-en">// 01 — the method</span></div>
-                <h2><span class="lang-it">Ordine. Metodologia.<br>Leadership.</span><span class="lang-en">Order. Methodology.<br>Leadership.</span></h2>
-                <p><span class="lang-it">Il mio percorso è insolito per design. Come <strong>Direttore della pubblicazione della mia scuola</strong>, ho imparato che il problema di ingegneria più difficile non è tecnico — è la comunicazione. Scomporre sistemi complessi in chiarezza che muove le persone all'azione.</span><span class="lang-en">My path is unconventional by design. As <strong>Editor-in-Chief of my school publication</strong>, I learned early that the hardest engineering problem isn't technical — it's communication. Breaking down complex systems into clarity that moves people to act.</span></p>
-                <p><span class="lang-it">Come <strong>tutor</strong>, ho affinato lo strumento di sicurezza più sottovalutato: la comprensione umana. <strong>L'Ingegneria Elettronica</strong> mi ha dato il framework analitico — precisione a livello di circuito, integrità del segnale, pensiero sistemico.</span><span class="lang-en">As a <strong>tutor</strong>, I refined the most underestimated security tool in existence: human understanding. <strong>Electronic Engineering</strong> gave me the analytical framework — circuit-level precision, signal integrity, systems thinking.</span></p>
-                <p><span class="lang-it">Insieme, queste discipline formano una sola filosofia: <strong>la sicurezza non si installa, si comprende.</strong></span><span class="lang-en">Together, these disciplines form a single philosophy: <strong>security is not installed, it is understood.</strong></span></p>
+<div class="divider"></div>
 
-                <div class="pillars">
-                    <div class="pillar">
-                        <div class="pillar-label"><span class="lang-it">Ordine</span><span class="lang-en">Order</span></div>
-                        <div class="pillar-text"><span class="lang-it">Pensiero strutturato da schemi hardware a politiche di sicurezza. Il caos è l'avversario.</span><span class="lang-en">Structured thinking from hardware schematics to security policies. Chaos is the adversary.</span></div>
-                    </div>
-                    <div class="pillar">
-                        <div class="pillar-label"><span class="lang-it">Metodologia</span><span class="lang-en">Methodology</span></div>
-                        <div class="pillar-text"><span class="lang-it">Audit sistematici, processi documentati e framework di sicurezza riproducibili.</span><span class="lang-en">Systematic auditing, documented processes, and reproducible security frameworks.</span></div>
-                    </div>
-                    <div class="pillar">
-                        <div class="pillar-label"><span class="lang-it">Leadership</span><span class="lang-en">Leadership</span></div>
-                        <div class="pillar-text"><span class="lang-it">La cultura della sicurezza inizia dall'alto e si diffonde attraverso ogni nodo umano della rete.</span><span class="lang-en">Security culture starts at the top and spreads through every human node in the network.</span></div>
-                    </div>
-                </div>
-            </div>
+<!-- ── UVP ── -->
+<section id="uvp">
+  <div class="section-wrap">
+    <div class="uvp-grid">
+      <div class="uvp-aside">
+        <span class="uvp-badge">UVP</span>
+        <p class="uvp-aside-text">
+          <span lang="it">Cosa rende l'approccio diverso.</span>
+          <span lang="en">What makes the approach different.</span>
+        </p>
+      </div>
+      <div class="uvp-body">
+        <p class="uvp-quote">
+          <span lang="it">"Non proteggo solo i sistemi — <em>proteggo le persone che li usano.</em>"</span>
+          <span lang="en">"I don't just secure systems — <em>I secure the people who use them.</em>"</span>
+        </p>
+        <p>
+          <span lang="it">Il mio approccio combina la comprensione a livello hardware con l'audit dei processi di alto livello e il coaching sulla sicurezza. Dove la maggior parte delle soluzioni corregge le vulnerabilità nel codice, io correggo le vulnerabilità nella cultura.</span>
+          <span lang="en">My approach combines hardware-level understanding with high-level process auditing and security coaching. Where most solutions patch vulnerabilities in code, I patch vulnerabilities in culture. Because a misconfigured human is the most exploited attack vector of all.</span>
+        </p>
+        <p>
+          <span lang="it">Le minacce tecniche vengono tradotte in abitudini umane attuabili. I segnali complessi diventano strategie leggibili. L'invisibile è reso visibile, documentato e difeso.</span>
+          <span lang="en">Technical threats are translated into actionable human habits. Complex signals become legible strategies. The invisible is made visible, documented, and defended.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="about-right">
-                <div style="padding: 2.5rem; background: rgba(26, 31, 58, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(99, 102, 241, 0.1); border-radius: 16px;">
-                    <div style="font-size: 1.3rem; font-weight: 700; color: var(--accent-indigo); margin-bottom: 1.5rem;">Valentina Segatti</div>
-                    <div style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
-                        <strong><span class="lang-it">Ingegnere Cybersecurity</span><span class="lang-en">Cybersecurity Engineer</span></strong><br><br>
-                        <span class="lang-it">Background:</span><span class="lang-en">Background:</span><br>
-                        • <span class="lang-it">Ingegneria Elettronica</span><span class="lang-en">Electronic Engineering</span><br>
-                        • <span class="lang-it">Coaching sulla Sicurezza</span><span class="lang-en">Security Coaching</span><br>
-                        • <span class="lang-it">Comunicazione Tecnica</span><span class="lang-en">Technical Communication</span><br><br>
-                        <span class="lang-it">Approccio: Human-Centric</span><span class="lang-en">Approach: Human-Centric</span><br>
-                        <span class="lang-it">Status: Disponibile per collaborazioni</span><span class="lang-en">Status: Open to Connect</span>
-                    </div>
-                </div>
+<div class="divider"></div>
 
-                <div style="padding: 2.5rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(99, 102, 241, 0.1); border-radius: 16px; margin-top: 1.5rem;">
-                    <div style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8;">
-                        <div style="color: var(--accent-emerald); margin-bottom: 0.5rem;">✓ <span class="lang-it">Livello hardware ... PROTETTO</span><span class="lang-en">Hardware layer ... SECURED</span></div>
-                        <div style="color: var(--accent-emerald); margin-bottom: 0.5rem;">✓ <span class="lang-it">Livello processo ... VERIFICATO</span><span class="lang-en">Process layer ... AUDITED</span></div>
-                        <div style="color: var(--accent-emerald); margin-bottom: 1rem;">✓ <span class="lang-it">Livello umano ... ADDESTRATO</span><span class="lang-en">Human layer ... TRAINED</span></div>
-                        <div style="color: var(--accent-indigo); font-weight: 600;">RESILIENCE_SCORE: 98.7%</div>
-                    </div>
-                </div>
-            </div>
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="section-wrap">
+    <div class="section-label">
+      <span lang="it">// 02 — competenze &amp; servizi</span>
+      <span lang="en">// 02 — expertise &amp; services</span>
+    </div>
+    <h2 class="section-title">
+      <span lang="it">Cosa Consegno</span>
+      <span lang="en">What I Deliver</span>
+    </h2>
+
+    <div class="services-grid">
+
+      <div class="svc-card c-cyan">
+        <div class="svc-num">01 /</div>
+        <div class="svc-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
         </div>
-    </section>
+        <h3><span lang="it">Audit Cyber-Processo</span><span lang="en">Cyber-Process Auditing</span></h3>
+        <p><span lang="it">Trasformo i flussi di lavoro caotici in sistemi ordinati e sicuri. Mappo i processi umani con la stessa precisione dei diagrammi di circuito — ogni nodo, ogni segnale, ogni punto di vulnerabilità.</span><span lang="en">Turning chaotic workflows into orderly, secure systems. I map human processes with the same precision as circuit diagrams — every node, every signal, every failure point.</span></p>
+        <span class="svc-tag">#ProcessSecurity</span>
+      </div>
 
-    <div class="divider"></div>
-
-    <!-- UVP -->
-    <section id="uvp">
-        <div class="uvp-wrap">
-            <div class="uvp-left">
-                <span class="uvp-badge">UVP</span>
-                <p><span class="lang-it">Cosa rende l'approccio<br>diverso.</span><span class="lang-en">What makes the<br>approach different.</span></p>
-            </div>
-
-            <div class="uvp-right">
-                <blockquote><span class="lang-it">"Non proteggo solo i sistemi — <span class="highlight">proteggo le persone che li usano.</span>"</span><span class="lang-en">"I don't just secure systems — <span class="highlight">I secure the people who use them.</span>"</span></blockquote>
-                <p class="uvp-text"><span class="lang-it">Il mio approccio combina la comprensione a livello hardware con l'audit dei processi di alto livello e il coaching sulla sicurezza. Dove la maggior parte delle soluzioni corregge le vulnerabilità nel codice, io correggo le vulnerabilità nella cultura.</span><span class="lang-en">My approach combines hardware-level understanding with high-level process auditing and security coaching. Where most solutions patch vulnerabilities in code, I patch vulnerabilities in culture.</span></p>
-                <p class="uvp-text"><span class="lang-it">Le minacce tecniche vengono tradotte in abitudini umane attuabili. I segnali complessi diventano strategie leggibili. L'invisibile è reso visibile, documentato e difeso.</span><span class="lang-en">Technical threats are translated into actionable human habits. Complex signals become legible strategies. The invisible is made visible, documented, and defended.</span></p>
-            </div>
+      <div class="svc-card c-green">
+        <div class="svc-num">02 /</div>
+        <div class="svc-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-    </section>
+        <h3><span lang="it">Coaching sulla Sicurezza</span><span lang="en">Security Coaching</span></h3>
+        <p><span lang="it">Traduco le minacce tecniche in abitudini umane attuabili. Dal riconoscimento del phishing all'igiene delle password — literacy ingegneristica per ogni membro del team.</span><span lang="en">Translating technical threats into actionable human habits. From phishing awareness to password hygiene — engineering literacy for every member of the team.</span></p>
+        <span class="svc-tag">#HumanFirewall</span>
+      </div>
 
-    <div class="divider"></div>
-
-    <!-- SERVICES -->
-    <section id="services">
-        <div class="services-wrap">
-            <div class="services-header">
-                <div class="section-tag"><span class="lang-it">// 02 — competenze &amp; servizi</span><span class="lang-en">// 02 — expertise &amp; services</span></div>
-                <h2><span class="lang-it">Cosa Consegno</span><span class="lang-en">What I Deliver</span></h2>
-            </div>
-
-            <div class="services-grid">
-                <div class="service-card indigo">
-                    <div class="service-num indigo">01</div>
-                    <div class="service-icon">🔍</div>
-                    <h3><span class="lang-it">Audit Cyber-Processo</span><span class="lang-en">Cyber-Process Auditing</span></h3>
-                    <p><span class="lang-it">Trasformo i flussi di lavoro caotici in sistemi ordinati e sicuri. Mappo i processi umani con la stessa precisione dei diagrammi di circuito.</span><span class="lang-en">Turning chaotic workflows into orderly, secure systems. I map human processes with the same precision as circuit diagrams.</span></p>
-                    <span class="service-tag indigo">#ProcessSecurity</span>
-                </div>
-
-                <div class="service-card emerald">
-                    <div class="service-num emerald">02</div>
-                    <div class="service-icon">👥</div>
-                    <h3><span class="lang-it">Coaching sulla Sicurezza</span><span class="lang-en">Security Coaching</span></h3>
-                    <p><span class="lang-it">Traduco le minacce tecniche in abitudini umane attuabili. Dal riconoscimento del phishing ai protocolli di password.</span><span class="lang-en">Translating technical threats into actionable human habits. From phishing awareness to password protocols.</span></p>
-                    <span class="service-tag emerald">#HumanAwareness</span>
-                </div>
-
-                <div class="service-card cyan">
-                    <div class="service-num cyan">03</div>
-                    <div class="service-icon">📝</div>
-                    <h3><span class="lang-it">Comunicazione Tecnica</span><span class="lang-en">Technical Communication</span></h3>
-                    <p><span class="lang-it">Rendo visibile e comprensibile l'invisibile — codice, segnali, protocolli. Documentazione e briefing sulla sicurezza che le persone leggono davvero.</span><span class="lang-en">Making the invisible — code, signals, protocols — visible and understandable. Documentation that humans actually read.</span></p>
-                    <span class="service-tag cyan">#ClearSignal</span>
-                </div>
-            </div>
+      <div class="svc-card c-indigo">
+        <div class="svc-num">03 /</div>
+        <div class="svc-icon-wrap">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         </div>
-    </section>
+        <h3><span lang="it">Comunicazione Tecnica</span><span lang="en">Technical Communication</span></h3>
+        <p><span lang="it">Rendo visibile e comprensibile l'invisibile — codice, segnali, protocolli. Scrittura tecnica, documentazione e briefing sulla sicurezza che le persone leggono davvero.</span><span lang="en">Making the invisible — code, signals, protocols — visible and understandable. Technical writing, documentation, and security briefings that humans actually read.</span></p>
+        <span class="svc-tag">#ClearSignal</span>
+      </div>
 
-    <div class="divider"></div>
+    </div>
+  </div>
+</section>
 
-    <!-- JOURNEY -->
-    <section id="journey">
-        <div class="journey-wrap">
-            <div class="section-tag"><span class="lang-it">// 03 — percorso del cliente</span><span class="lang-en">// 03 — customer journey</span></div>
-            <h2 style="margin-bottom: 3rem;"><span class="lang-it">Il Tuo Percorso verso la Resilienza della Sicurezza</span><span class="lang-en">Your Path to Security Resilience</span></h2>
+<div class="divider"></div>
 
-            <div class="journey-steps">
-                <div class="journey-step">
-                    <div class="journey-number">1</div>
-                    <h4><span class="lang-it">Consapevolezza</span><span class="lang-en">Awareness</span></h4>
-                    <p><span class="lang-it">Riconosci il divario. La sicurezza non riguarda solo la tecnologia — riguarda le persone.</span><span class="lang-en">Recognize the Gap. Security isn't just about technology — it's about people.</span></p>
-                </div>
-                <div class="journey-step">
-                    <div class="journey-number">2</div>
-                    <h4><span class="lang-it">Valutazione</span><span class="lang-en">Assessment</span></h4>
-                    <p><span class="lang-it">Mappiamo la tua postura di sicurezza: processi, comportamenti, vulnerabilità.</span><span class="lang-en">We map your security posture: processes, behaviors, vulnerabilities.</span></p>
-                </div>
-                <div class="journey-step">
-                    <div class="journey-number">3</div>
-                    <h4><span class="lang-it">Trasformazione</span><span class="lang-en">Transformation</span></h4>
-                    <p><span class="lang-it">Stabiliamo processi sicuri e creiamo una cultura dove la sicurezza è responsabilità di tutti.</span><span class="lang-en">Establish secure processes and create a culture where security is everyone's responsibility.</span></p>
-                </div>
-                <div class="journey-step">
-                    <div class="journey-number">4</div>
-                    <h4><span class="lang-it">Resilienza</span><span class="lang-en">Resilience</span></h4>
-                    <p><span class="lang-it">La tua organizzazione diventa resiliente. La sicurezza è un vantaggio competitivo.</span><span class="lang-en">Your organization becomes resilient. Security is a competitive advantage.</span></p>
-                </div>
-            </div>
+<!-- ── JOURNEY ── -->
+<section id="journey">
+  <div class="section-wrap">
+    <div class="section-label">
+      <span lang="it">// 03 — percorso del cliente</span>
+      <span lang="en">// 03 — customer journey</span>
+    </div>
+    <h2 class="section-title">
+      <span lang="it">Il Tuo Percorso verso<br>la Resilienza</span>
+      <span lang="en">Your Path to<br>Security Resilience</span>
+    </h2>
+
+    <div class="journey-steps">
+      <div class="journey-step">
+        <div class="step-num">01</div>
+        <h4><span lang="it">Consapevolezza</span><span lang="en">Awareness</span></h4>
+        <p><span lang="it">Riconosci il divario. La sicurezza non riguarda solo la tecnologia — riguarda le persone.</span><span lang="en">Recognize the gap. Security isn't just about technology — it's about people.</span></p>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">02</div>
+        <h4><span lang="it">Valutazione</span><span lang="en">Assessment</span></h4>
+        <p><span lang="it">Mappiamo insieme la tua postura di sicurezza: processi, comportamenti, vulnerabilità.</span><span lang="en">We map your security posture: processes, behaviors, vulnerabilities.</span></p>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">03</div>
+        <h4><span lang="it">Trasformazione</span><span lang="en">Transformation</span></h4>
+        <p><span lang="it">Stabiliamo processi sicuri e creiamo una cultura dove la sicurezza è responsabilità di tutti.</span><span lang="en">Establish secure processes and create a culture where security is everyone's responsibility.</span></p>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">04</div>
+        <h4><span lang="it">Resilienza</span><span lang="en">Resilience</span></h4>
+        <p><span lang="it">La tua organizzazione diventa resiliente. La sicurezza è un vantaggio competitivo.</span><span lang="en">Your organization becomes resilient. Security is a competitive advantage.</span></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── FEEDBACK ── -->
+<section id="feedback">
+  <div class="section-wrap">
+    <div class="section-label">
+      <span lang="it">// 04 — feedback &amp; impatto</span>
+      <span lang="en">// 04 — feedback &amp; impact</span>
+    </div>
+    <h2 class="section-title" style="margin-bottom:2.5rem">
+      <span lang="it">Fidata dai Leader della Sicurezza</span>
+      <span lang="en">Trusted by Security Leaders</span>
+    </h2>
+
+    <div class="carousel-mask">
+      <div class="carousel-track">
+        <!-- cards ×2 for seamless loop -->
+        <div class="fb-card">
+          <div class="stars">★★★★★</div>
+          <p class="fb-quote"><span lang="it">"Valentina ha trasformato il modo in cui pensiamo alla sicurezza. Non è più solo un problema dell'IT."</span><span lang="en">"Valentina transformed how we think about security. It's no longer just IT's problem."</span></p>
+          <div class="fb-author"><span lang="it">Direttore della Sicurezza</span><span lang="en">Security Director</span></div>
+          <div class="fb-role"><span lang="it">Cliente Enterprise</span><span lang="en">Enterprise Client</span></div>
         </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- FEEDBACK CAROUSEL -->
-    <section id="feedback">
-        <div class="feedback-wrap">
-            <div class="section-tag"><span class="lang-it">// 04 — feedback &amp; impatto</span><span class="lang-en">// 04 — feedback &amp; impact</span></div>
-            <h2 style="margin-bottom: 3rem;"><span class="lang-it">Fidati dai Leader della Sicurezza</span><span class="lang-en">Trusted by Security Leaders</span></h2>
-
-            <div class="carousel-container">
-                <div class="carousel-track">
-                    <div class="feedback-card">
-                        <div class="stars">★★★★★</div>
-                        <p class="feedback-quote"><span class="lang-it">"Valentina ha trasformato il modo in cui pensiamo alla sicurezza. Non è più solo un problema dell'IT."</span><span class="lang-en">"Valentina transformed how we think about security. It's no longer just IT's problem."</span></p>
-                        <div class="feedback-author"><span class="lang-it">Direttore della Sicurezza</span><span class="lang-en">Security Director</span></div>
-                        <div class="feedback-role"><span class="lang-it">Cliente Enterprise</span><span class="lang-en">Enterprise Client</span></div>
-                    </div>
-
-                    <div class="feedback-card">
-                        <div class="stars">★★★★★</div>
-                        <p class="feedback-quote"><span class="lang-it">"Le sessioni di coaching hanno reso i concetti di sicurezza complessi davvero comprensibili al nostro team."</span><span class="lang-en">"The coaching sessions made complex security concepts actually understandable to our team."</span></p>
-                        <div class="feedback-author"><span class="lang-it">Responsabile Operazioni</span><span class="lang-en">Operations Manager</span></div>
-                        <div class="feedback-role"><span class="lang-it">Azienda Finanziaria</span><span class="lang-en">Finance Firm</span></div>
-                    </div>
-
-                    <div class="feedback-card">
-                        <div class="stars">★★★★★</div>
-                        <p class="feedback-quote"><span class="lang-it">"La sua documentazione è la scrittura tecnica più chiara che abbia mai visto. Finalmente, sicurezza che ha senso."</span><span class="lang-en">"Her documentation is the clearest technical writing I've ever seen. Finally, security that makes sense."</span></p>
-                        <div class="feedback-author">CTO</div>
-                        <div class="feedback-role"><span class="lang-it">SaaS Startup</span><span class="lang-en">SaaS Startup</span></div>
-                    </div>
-
-                    <div class="feedback-card">
-                        <div class="stars">★★★★★</div>
-                        <p class="feedback-quote"><span class="lang-it">"Siamo passati dal 60% al 95% di consapevolezza della sicurezza in soli 6 mesi. I risultati parlano da soli."</span><span class="lang-en">"We went from 60% to 95% security awareness in just 6 months. The results speak for themselves."</span></p>
-                        <div class="feedback-author"><span class="lang-it">Direttore HR</span><span class="lang-en">HR Director</span></div>
-                        <div class="feedback-role"><span class="lang-it">Manifattura</span><span class="lang-en">Manufacturing</span></div>
-                    </div>
-
-                    <!-- Duplicate for continuous scroll -->
-                    <div class="feedback-card">
-                        <div class="stars">★★★★★</div>
-                        <p class="feedback-quote"><span class="lang-it">"Valentina ha trasformato il modo in cui pensiamo alla sicurezza. Non è più solo un problema dell'IT."</span><span class="lang-en">"Valentina transformed how we think about security. It's no longer just IT's problem."</span></p>
-                        <div class="feedback-author"><span class="lang-it">Direttore della Sicurezza</span><span class="lang-en">Security Director</span></div>
-                        <div class="feedback-role"><span class="lang-it">Cliente Enterprise</span><span class="lang-en">Enterprise Client</span></div>
-                    </div>
-
-                    <div class="feedback-card">
-                        <div class="stars">★★★★★</div>
-                        <p class="feedback-quote"><span class="lang-it">"Le sessioni di coaching hanno reso i concetti di sicurezza complessi davvero comprensibili al nostro team."</span><span class="lang-en">"The coaching sessions made complex security concepts actually understandable to our team."</span></p>
-                        <div class="feedback-author"><span class="lang-it">Responsabile Operazioni</span><span class="lang-en">Operations Manager</span></div>
-                        <div class="feedback-role"><span class="lang-it">Azienda Finanziaria</span><span class="lang-en">Finance Firm</span></div>
-                    </div>
-                </div>
-            </div>
+        <div class="fb-card">
+          <div class="stars">★★★★★</div>
+          <p class="fb-quote"><span lang="it">"Le sessioni di coaching hanno reso i concetti di sicurezza complessi davvero comprensibili per il nostro team."</span><span lang="en">"The coaching sessions made complex security concepts actually understandable to our team."</span></p>
+          <div class="fb-author"><span lang="it">Responsabile Operazioni</span><span lang="en">Operations Manager</span></div>
+          <div class="fb-role"><span lang="it">Azienda Finanziaria</span><span lang="en">Finance Firm</span></div>
         </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- CTA -->
-    <section id="cta">
-        <div class="cta-wrap">
-            <div class="section-tag"><span class="lang-it">// 05 — costruiamo insieme</span><span class="lang-en">// 05 — let's build together</span></div>
-            <h2><span class="lang-it">Costruisci una Cultura Resiliente</span><span class="lang-en">Build a Resilient Culture</span></h2>
-            <p style="max-width: 600px; margin: 2rem auto;"><span class="lang-it">La sicurezza è un processo, non solo un prodotto. Che tu abbia bisogno di un audit dei processi, coaching del team o documentazione tecnica — costruiamo consapevolezza insieme.</span><span class="lang-en">Security is a process, not just a product. Whether you need a process audit, team coaching, or technical documentation — let's engineer awareness together.</span></p>
-
-            <div class="cta-buttons-group">
-                <a href="https://linkedin.com/in/valentina-segatti-b59a633b6" target="_blank" rel="noopener noreferrer" class="contact-box">
-                    <div class="contact-icon">💼</div>
-                    <div class="contact-label">LinkedIn</div>
-                    <div class="contact-value"><span class="lang-it">Connettiti con Valentina</span><span class="lang-en">Connect with Valentina</span></div>
-                </a>
-
-                <a href="mailto:valentina.segatti@gmail.com" class="contact-box">
-                    <div class="contact-icon">✉️</div>
-                    <div class="contact-label">Email</div>
-                    <div class="contact-value"><span class="lang-it">Invia un Messaggio</span><span class="lang-en">Send a Message</span></div>
-                </a>
-            </div>
-
-            <div class="manifesto-card">
-                <div class="manifesto-label"><span class="lang-it">// security.manifesto</span><span class="lang-en">// security.manifesto</span></div>
-                <div class="manifesto-line">
-                    <span class="manifesto-arrow">→</span>
-                    <span class="manifesto-text"><span class="lang-it">La sicurezza è un processo, non un prodotto.</span><span class="lang-en">Security is a process, not a product.</span></span>
-                </div>
-                <div class="manifesto-line">
-                    <span class="manifesto-arrow">→</span>
-                    <span class="manifesto-text"><span class="lang-it">Le persone sono il perimetro.</span><span class="lang-en">People are the perimeter.</span></span>
-                </div>
-                <div class="manifesto-line">
-                    <span class="manifesto-arrow">→</span>
-                    <span class="manifesto-text"><span class="lang-it">La consapevolezza è la prima patch.</span><span class="lang-en">Awareness is the first patch.</span></span>
-                </div>
-                <div class="manifesto-line">
-                    <span class="manifesto-arrow">→</span>
-                    <span class="manifesto-text"><span class="lang-it">L'ordine sconfigge l'entropia.</span><span class="lang-en">Order defeats entropy.</span></span>
-                </div>
-                <div class="manifesto-line">
-                    <span class="manifesto-arrow">→</span>
-                    <span class="manifesto-text"><span class="lang-it">Il miglior firewall è una mente consapevole.</span><span class="lang-en">The best firewall is a trained mind.</span></span>
-                </div>
-                <div class="manifesto-line highlight">
-                    <span class="manifesto-arrow">→</span>
-                    <span class="manifesto-text">#BeAware</span>
-                </div>
-            </div>
+        <div class="fb-card">
+          <div class="stars">★★★★★</div>
+          <p class="fb-quote"><span lang="it">"La sua documentazione è la scrittura tecnica più chiara che abbia mai visto. Finalmente, sicurezza che ha senso."</span><span lang="en">"Her documentation is the clearest technical writing I've ever seen. Finally, security that makes sense."</span></p>
+          <div class="fb-author">CTO</div>
+          <div class="fb-role">SaaS Startup</div>
         </div>
-    </section>
+        <div class="fb-card">
+          <div class="stars">★★★★★</div>
+          <p class="fb-quote"><span lang="it">"Siamo passati dal 60% al 95% di consapevolezza della sicurezza in soli 6 mesi. I risultati parlano da soli."</span><span lang="en">"We went from 60% to 95% security awareness in just 6 months. The results speak for themselves."</span></p>
+          <div class="fb-author"><span lang="it">Direttore HR</span><span lang="en">HR Director</span></div>
+          <div class="fb-role"><span lang="it">Manifattura</span><span lang="en">Manufacturing</span></div>
+        </div>
+        <!-- duplicate -->
+        <div class="fb-card">
+          <div class="stars">★★★★★</div>
+          <p class="fb-quote"><span lang="it">"Valentina ha trasformato il modo in cui pensiamo alla sicurezza. Non è più solo un problema dell'IT."</span><span lang="en">"Valentina transformed how we think about security. It's no longer just IT's problem."</span></p>
+          <div class="fb-author"><span lang="it">Direttore della Sicurezza</span><span lang="en">Security Director</span></div>
+          <div class="fb-role"><span lang="it">Cliente Enterprise</span><span lang="en">Enterprise Client</span></div>
+        </div>
+        <div class="fb-card">
+          <div class="stars">★★★★★</div>
+          <p class="fb-quote"><span lang="it">"Le sessioni di coaching hanno reso i concetti di sicurezza complessi davvero comprensibili per il nostro team."</span><span lang="en">"The coaching sessions made complex security concepts actually understandable to our team."</span></p>
+          <div class="fb-author"><span lang="it">Responsabile Operazioni</span><span lang="en">Operations Manager</span></div>
+          <div class="fb-role"><span lang="it">Azienda Finanziaria</span><span lang="en">Finance Firm</span></div>
+        </div>
+        <div class="fb-card">
+          <div class="stars">★★★★★</div>
+          <p class="fb-quote"><span lang="it">"La sua documentazione è la scrittura tecnica più chiara che abbia mai visto. Finalmente, sicurezza che ha senso."</span><span lang="en">"Her documentation is the clearest technical writing I've ever seen. Finally, security that makes sense."</span></p>
+          <div class="fb-author">CTO</div>
+          <div class="fb-role">SaaS Startup</div>
+        </div>
+        <div class="fb-card">
+          <div class="stars">★★★★★</div>
+          <p class="fb-quote"><span lang="it">"Siamo passati dal 60% al 95% di consapevolezza della sicurezza in soli 6 mesi. I risultati parlano da soli."</span><span lang="en">"We went from 60% to 95% security awareness in just 6 months. The results speak for themselves."</span></p>
+          <div class="fb-author"><span lang="it">Direttore HR</span><span lang="en">HR Director</span></div>
+          <div class="fb-role"><span lang="it">Manifattura</span><span lang="en">Manufacturing</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div class="divider"></div>
+<div class="divider"></div>
 
-    <!-- FOOTER -->
-    <footer>
-        <span class="footer-left">© 2026 — Valentina Segatti | <span class="lang-it">Ingegneria della Sicurezza Human-Centric</span><span class="lang-en">Human-Centric Security Engineering</span></span>
-        <span class="footer-right">#EngineeringAwareness · #BeAware</span>
-    </footer>
+<!-- ── CTA ── -->
+<section id="cta">
+  <div class="section-wrap">
+    <div class="cta-grid">
+      <div class="cta-text">
+        <div class="section-label">
+          <span lang="it">// 05 — costruiamo insieme</span>
+          <span lang="en">// 05 — let's build together</span>
+        </div>
+        <h2 class="section-title">
+          <span lang="it">Costruisci una<br>Cultura Resiliente.</span>
+          <span lang="en">Build a<br>Resilient Culture.</span>
+        </h2>
+        <p>
+          <span lang="it">La sicurezza è un processo, non solo un prodotto. Che tu abbia bisogno di un audit dei processi, coaching del team o documentazione tecnica — costruiamo consapevolezza insieme.</span>
+          <span lang="en">Security is a process, not just a product. Whether you need a process audit, team coaching, or technical documentation — let's engineer awareness together.</span>
+        </p>
 
-    <script>
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
+        <div class="contact-cards">
+          <a href="https://linkedin.com/in/valentina-segatti-b59a633b6" target="_blank" rel="noopener" class="contact-card">
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div class="contact-card-label">LinkedIn</div>
+            <div class="contact-card-sub">
+              <span lang="it">Connettiti</span>
+              <span lang="en">Connect</span>
+            </div>
+          </a>
 
-        // Check for saved theme preference or default to dark mode
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        if (currentTheme === 'light') {
-            body.classList.add('light-mode');
-            themeToggle.textContent = '🌙';
-        } else {
-            themeToggle.textContent = '☀️';
-        }
+          <a href="mailto:valentina.segatti@gmail.com" class="contact-card">
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-card-label">Email</div>
+            <div class="contact-card-sub">
+              <span lang="it">Scrivi un messaggio</span>
+              <span lang="en">Send a message</span>
+            </div>
+          </a>
+        </div>
+      </div>
 
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
-            localStorage.setItem('theme', theme);
-            themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
-        });
+      <div class="manifesto">
+        <div class="manifesto-label">// security.manifesto</div>
+        <div class="mline">
+          <span class="mline-arrow">→</span>
+          <span class="mline-text"><span lang="it">La sicurezza è un processo, non un prodotto.</span><span lang="en">Security is a process, not a product.</span></span>
+        </div>
+        <div class="mline">
+          <span class="mline-arrow">→</span>
+          <span class="mline-text"><span lang="it">Le persone sono il perimetro.</span><span lang="en">People are the perimeter.</span></span>
+        </div>
+        <div class="mline">
+          <span class="mline-arrow">→</span>
+          <span class="mline-text"><span lang="it">La consapevolezza è la prima patch.</span><span lang="en">Awareness is the first patch.</span></span>
+        </div>
+        <div class="mline">
+          <span class="mline-arrow">→</span>
+          <span class="mline-text"><span lang="it">L'ordine sconfigge l'entropia.</span><span lang="en">Order defeats entropy.</span></span>
+        </div>
+        <div class="mline">
+          <span class="mline-arrow">→</span>
+          <span class="mline-text"><span lang="it">Il miglior firewall è una mente consapevole.</span><span lang="en">The best firewall is a trained mind.</span></span>
+        </div>
+        <div class="mline highlight">
+          <span class="mline-arrow">→</span>
+          <span class="mline-text">#BeAware #EngineeringAwareness #VibeCoding #CyberSecurity</span>
+        </div>
+      </div>
 
-        // Language Toggle
-        const langToggle = document.getElementById('langToggle');
-        const currentLang = localStorage.getItem('language') || 'it';
-        if (currentLang === 'en') {
-            body.classList.add('lang-en');
-        }
+    </div>
+  </div>
+</section>
 
-        langToggle.addEventListener('click', () => {
-            body.classList.toggle('lang-en');
-            const lang = body.classList.contains('lang-en') ? 'en' : 'it';
-            localStorage.setItem('language', lang);
-        });
+<div class="divider"></div>
 
-        // Smooth scroll on nav link click
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+<footer>
+  <span class="footer-copy">
+    © 2026 — Valentina Segatti |
+    <span lang="it">Ingegneria della Sicurezza Human-Centric</span>
+    <span lang="en">Human-Centric Security Engineering</span>
+  </span>
+  <span class="footer-tags">#EngineeringAwareness · #BeAware</span>
+</footer>
 
-        // Nav scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 20) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+<script>
+/* ═══════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════ */
+const dot  = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0, rx=0,ry=0;
 
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navUl = document.querySelector('nav ul');
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left  = mx + 'px';
+  dot.style.top   = my + 'px';
+});
 
-        mobileMenuBtn.addEventListener('click', () => {
-            if (navUl.style.display === 'flex') {
-                navUl.style.display = 'none';
-            } else {
-                navUl.style.display = 'flex';
-                navUl.style.position = 'absolute';
-                navUl.style.top = '100%';
-                navUl.style.left = '0';
-                navUl.style.right = '0';
-                navUl.style.flexDirection = 'column';
-                navUl.style.gap = '0';
-                navUl.style.background = 'rgba(10, 14, 39, 0.98)';
-                navUl.style.backdropFilter = 'blur(12px)';
-                navUl.style.borderBottom = '1px solid rgba(45, 50, 80, 0.5)';
-                navUl.style.padding = '1rem 1.5rem';
-                navUl.style.zIndex = '99';
-            }
-        });
+(function animRing() {
+  rx += (mx - rx) * 0.15;
+  ry += (my - ry) * 0.15;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animRing);
+})();
 
-        // Close mobile menu when link is clicked
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                navUl.style.display = 'none';
-            });
-        });
-    </script>
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+  el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+});
+
+/* ═══════════════════════════════════
+   SCROLL PROGRESS BAR
+═══════════════════════════════════ */
+const bar = document.getElementById('scrollBar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  bar.style.width = pct + '%';
+});
+
+/* ═══════════════════════════════════
+   NAV SCROLL EFFECT
+═══════════════════════════════════ */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 30);
+});
+
+/* ═══════════════════════════════════
+   THEME TOGGLE
+   Correctly writes to html[data-theme]
+═══════════════════════════════════ */
+const html      = document.documentElement;
+const themeBtn  = document.getElementById('themeBtn');
+const themeIcon = document.getElementById('themeIcon');
+
+// Read saved preference or default to dark
+const savedTheme = localStorage.getItem('vs-theme') || 'dark';
+html.setAttribute('data-theme', savedTheme);
+themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+themeBtn.addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  const next    = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('vs-theme', next);
+  themeIcon.textContent = next === 'dark' ? '☀️' : '🌙';
+});
+
+/* ═══════════════════════════════════
+   LANGUAGE TOGGLE
+   Works by toggling html[data-lang]
+   CSS hides/shows [lang="it"] [lang="en"]
+═══════════════════════════════════ */
+const langBtn = document.getElementById('langBtn');
+
+const savedLang = localStorage.getItem('vs-lang') || 'it';
+html.setAttribute('data-lang', savedLang);
+html.setAttribute('lang', savedLang);
+
+langBtn.addEventListener('click', () => {
+  const current = html.getAttribute('data-lang');
+  const next    = current === 'it' ? 'en' : 'it';
+  html.setAttribute('data-lang', next);
+  html.setAttribute('lang', next);
+  localStorage.setItem('vs-lang', next);
+});
+
+/* ═══════════════════════════════════
+   SMOOTH SCROLL
+═══════════════════════════════════ */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+/* ═══════════════════════════════════
+   MOBILE MENU
+═══════════════════════════════════ */
+const mobileBtn  = document.getElementById('mobileBtn');
+const navLinks   = document.querySelector('.nav-links');
+let menuOpen = false;
+
+mobileBtn.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  if (menuOpen) {
+    navLinks.style.cssText = `
+      display:flex; flex-direction:column; gap:0;
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--nav-bg); backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+      padding:1rem 1.5rem;
+    `;
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.style.display='block'; a.style.padding='0.75rem 0'; a.style.borderBottom='1px solid var(--border)';
+    });
+  } else {
+    navLinks.style.display = 'none';
+  }
+});
+
+document.querySelectorAll('nav a').forEach(a => {
+  a.addEventListener('click', () => {
+    menuOpen = false;
+    navLinks.style.display = 'none';
+  });
+});
+
+/* ═══════════════════════════════════
+   SCROLL-TRIGGERED REVEAL
+═══════════════════════════════════ */
+const revealEls = document.querySelectorAll(
+  '.pillar, .svc-card, .journey-step, .fb-card, .identity-card, .manifesto'
+);
+revealEls.forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(16px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+});
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+revealEls.forEach(el => io.observe(el));
+</script>
 </body>
 </html>
 
