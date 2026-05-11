@@ -758,6 +758,9 @@ h2.section-title {
   position: relative;
   overflow: hidden;
   transition: background 0.3s;
+  display: flex;          
+  flex-direction: column; 
+  height: 100%;
 }
 .svc-card:hover { background: var(--bg2); }
 
@@ -814,6 +817,8 @@ h2.section-title {
   font-size: 10px;
   letter-spacing: 0.12em;
   opacity: 0.7;
+  margin-top: auto;       
+  padding-top: 1.5rem;
 }
 .svc-card.c-cyan   .svc-tag { color: var(--cyan); }
 .svc-card.c-green  .svc-tag { color: var(--green); }
@@ -1945,14 +1950,6 @@ span[lang="it"], span[lang="en"] { display: inline; }
       </div>
 
     </div>
-    <div class="svc-hashtag-row">
-      <span class="svc-tag c-cyan">#ProcessSecurity</span>
-      <span class="svc-hashtag-sep">·</span>
-      <span class="svc-tag c-green">#HumanFirewall</span>
-      <span class="svc-hashtag-sep">·</span>
-      <span class="svc-tag c-indigo">#ClearSignal</span>
-    </div>
-  </div>
 </section>
 
 <div class="divider"></div>
