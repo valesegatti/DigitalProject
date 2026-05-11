@@ -1097,6 +1097,234 @@ footer {
 }
 
 /* ═══════════════════════════════════
+   USER PERSONA SECTION
+═══════════════════════════════════ */
+#personas { background: var(--bg0); position: relative; z-index: 1; overflow: hidden; }
+
+/* faint circuit-trace background for this section */
+#personas::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 80% 20%, rgba(245,158,11,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 15% 80%, rgba(56,189,248,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.personas-intro {
+  max-width: 600px;
+  margin-bottom: 4rem;
+}
+.personas-intro p {
+  font-size: 1rem;
+  color: var(--text2);
+  line-height: 1.85;
+}
+
+/* PERSONA TABS */
+.persona-tabs {
+  display: flex; gap: 0; margin-bottom: 0;
+  border-bottom: 1px solid var(--border);
+}
+.p-tab {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: var(--text3);
+  cursor: none;
+  position: relative;
+  transition: color 0.2s;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.p-tab:hover { color: var(--text2); }
+.p-tab.active {
+  color: var(--cyan);
+  border-bottom-color: var(--cyan);
+}
+.p-tab.active.amber { color: #f59e0b; border-bottom-color: #f59e0b; }
+.p-tab.active.green { color: var(--green); border-bottom-color: var(--green); }
+
+/* PERSONA PANELS */
+.persona-panel { display: none; padding-top: 2.5rem; }
+.persona-panel.active { display: grid; grid-template-columns: 280px 1fr; gap: 3rem; align-items: start; }
+
+/* PERSONA PROFILE CARD */
+.persona-profile {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.persona-profile-top {
+  padding: 1.75rem 1.5rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+/* coloured top accent bar per persona */
+.persona-profile-top::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.col-cyan  .persona-profile-top::before { background: var(--cyan); }
+.col-amber .persona-profile-top::before { background: #f59e0b; }
+.col-green .persona-profile-top::before { background: var(--green); }
+
+.persona-avatar {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  margin-bottom: 1rem;
+}
+.col-cyan  .persona-avatar { background: var(--cyan-dim); }
+.col-amber .persona-avatar { background: rgba(245,158,11,0.12); }
+.col-green .persona-avatar { background: var(--green-dim); }
+
+.persona-name {
+  font-size: 1rem; font-weight: 700;
+  color: var(--text1); margin-bottom: 0.2rem;
+}
+.persona-role-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+.col-cyan  .persona-role-tag { color: var(--cyan); }
+.col-amber .persona-role-tag { color: #f59e0b; }
+.col-green .persona-role-tag { color: var(--green); }
+
+.persona-meta {
+  display: flex; flex-direction: column; gap: 0.45rem;
+}
+.persona-meta-row {
+  display: flex; gap: 0.5rem; align-items: flex-start;
+  font-size: 11px; color: var(--text2); line-height: 1.5;
+}
+.persona-meta-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text3); min-width: 60px; padding-top: 1px;
+}
+
+.persona-stats {
+  padding: 1.25rem 1.5rem;
+  display: flex; flex-direction: column; gap: 0.9rem;
+}
+.persona-stat-row {
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.persona-stat-label {
+  display: flex; justify-content: space-between;
+  font-size: 10px; color: var(--text3);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+}
+.persona-stat-bar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.persona-stat-fill {
+  height: 100%;
+  border-radius: 2px;
+  animation: bar-grow 1.2s cubic-bezier(0.4,0,0.2,1) 0.2s both;
+}
+.col-cyan  .persona-stat-fill { background: var(--cyan); }
+.col-amber .persona-stat-fill { background: #f59e0b; }
+.col-green .persona-stat-fill { background: var(--green); }
+
+/* PERSONA CONTENT */
+.persona-content { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.persona-block {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+.persona-block:hover { border-color: var(--border-accent); }
+
+.pb-header {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 1.1rem;
+}
+.pb-icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+}
+.pb-icon.frustration { background: rgba(239,68,68,0.12); }
+.pb-icon.goal        { background: var(--green-dim); }
+.pb-icon.solution    { background: var(--cyan-dim); }
+.pb-icon.amber       { background: rgba(245,158,11,0.12); }
+
+.pb-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+}
+.pb-title.frustration { color: #f87171; }
+.pb-title.goal        { color: var(--green); }
+.pb-title.solution    { color: var(--cyan); }
+.pb-title.amber       { color: #f59e0b; }
+
+/* scenario quote — the "frustrated voice" */
+.frustration-quote {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text2);
+  line-height: 1.75;
+  border-left: 2px solid rgba(239,68,68,0.35);
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+.frustration-points {
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.f-point {
+  display: flex; gap: 0.6rem; align-items: flex-start;
+  font-size: 0.875rem; color: var(--text2); line-height: 1.6;
+}
+.f-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #f87171;
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+.goal-list, .solution-list {
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.g-item, .s-item {
+  display: flex; gap: 0.6rem; align-items: flex-start;
+  font-size: 0.875rem; color: var(--text2); line-height: 1.6;
+}
+.g-check { color: var(--green); flex-shrink: 0; font-size: 12px; margin-top: 2px; }
+.s-arrow { color: var(--cyan); flex-shrink: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-top: 2px; }
+.col-amber .s-arrow { color: #f59e0b; }
+.col-green .s-arrow { color: var(--green); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .persona-panel.active { grid-template-columns: 1fr; }
+  .persona-tabs { overflow-x: auto; }
+  .p-tab { white-space: nowrap; }
+}
+
+/* ═══════════════════════════════════
    GRAPHIC OVERHAUL — diagonal stripe, amber accent, new card look
 ═══════════════════════════════════ */
 
@@ -1272,6 +1500,7 @@ span[lang="it"], span[lang="en"] { display: inline; }
     <li><a href="#uvp"><span lang="it">Approccio</span><span lang="en">Approach</span></a></li>
     <li><a href="#services"><span lang="it">Servizi</span><span lang="en">Services</span></a></li>
     <li><a href="#journey"><span lang="it">Percorso</span><span lang="en">Journey</span></a></li>
+    <li><a href="#personas"><span lang="it">Persone</span><span lang="en">Personas</span></a></li>
     <li><a href="#cta"><span lang="it">Contatti</span><span lang="en">Connect</span></a></li>
   </ul>
 
@@ -1580,12 +1809,352 @@ span[lang="it"], span[lang="en"] { display: inline; }
 
 <div class="divider"></div>
 
+<!-- ── USER PERSONAS ── -->
+<section id="personas">
+  <div class="section-wrap">
+    <div class="section-label">
+      <span lang="it">// 04 — chi posso aiutare</span>
+      <span lang="en">// 04 — who I can help</span>
+    </div>
+    <h2 class="section-title">
+      <span lang="it">Riconosci<br>la tua frustrazione?</span>
+      <span lang="en">Do You Recognise<br>Your Frustration?</span>
+    </h2>
+
+    <div class="personas-intro">
+      <p>
+        <span lang="it">Ogni organizzazione ha un punto cieco diverso. Qui trovi tre profili reali — persone con responsabilità diverse, ma con lo stesso problema di fondo: la sicurezza è un concetto astratto, finché non diventa un'emergenza.</span>
+        <span lang="en">Every organisation has a different blind spot. These are three real profiles — people with different roles, but the same underlying problem: security is abstract, until it becomes a crisis.</span>
+      </p>
+    </div>
+
+    <!-- TABS -->
+    <div class="persona-tabs">
+      <button class="p-tab active" data-panel="p1">
+        <span lang="it">Il Manager</span><span lang="en">The Manager</span>
+      </button>
+      <button class="p-tab amber" data-panel="p2">
+        <span lang="it">Il Tecnico</span><span lang="en">The Tech Lead</span>
+      </button>
+      <button class="p-tab green" data-panel="p3">
+        <span lang="it">Il Fondatore</span><span lang="en">The Founder</span>
+      </button>
+    </div>
+
+    <!-- ── PERSONA 1: The Manager ── -->
+    <div class="persona-panel active col-cyan" id="p1">
+      <div class="persona-profile">
+        <div class="persona-profile-top">
+          <div class="persona-avatar">👔</div>
+          <div class="persona-name">Marco R.</div>
+          <div class="persona-role-tag">
+            <span lang="it">Operations Manager · 12 anni di exp.</span>
+            <span lang="en">Operations Manager · 12 yrs exp.</span>
+          </div>
+          <div class="persona-meta">
+            <div class="persona-meta-row">
+              <span class="persona-meta-key"><span lang="it">Settore</span><span lang="en">Sector</span></span>
+              <span><span lang="it">Manifattura, 80 dipendenti</span><span lang="en">Manufacturing, 80 employees</span></span>
+            </div>
+            <div class="persona-meta-row">
+              <span class="persona-meta-key"><span lang="it">Obiettivo</span><span lang="en">Goal</span></span>
+              <span><span lang="it">Zero incidenti, audit superati</span><span lang="en">Zero incidents, clean audits</span></span>
+            </div>
+            <div class="persona-meta-row">
+              <span class="persona-meta-key"><span lang="it">Budget</span><span lang="en">Budget</span></span>
+              <span><span lang="it">Limitato, giustificazione difficile</span><span lang="en">Limited, hard to justify</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="persona-stats">
+          <div class="persona-stat-row">
+            <div class="persona-stat-label">
+              <span><span lang="it">Consapevolezza team</span><span lang="en">Team awareness</span></span>
+              <span>28%</span>
+            </div>
+            <div class="persona-stat-bar"><div class="persona-stat-fill" style="width:28%"></div></div>
+          </div>
+          <div class="persona-stat-row">
+            <div class="persona-stat-label">
+              <span><span lang="it">Processi documentati</span><span lang="en">Documented processes</span></span>
+              <span>15%</span>
+            </div>
+            <div class="persona-stat-bar"><div class="persona-stat-fill" style="width:15%"></div></div>
+          </div>
+          <div class="persona-stat-row">
+            <div class="persona-stat-label">
+              <span><span lang="it">Cultura della sicurezza</span><span lang="en">Security culture</span></span>
+              <span>10%</span>
+            </div>
+            <div class="persona-stat-bar"><div class="persona-stat-fill" style="width:10%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-content">
+        <!-- FRUSTRATION -->
+        <div class="persona-block">
+          <div class="pb-header">
+            <div class="pb-icon frustration">⚡</div>
+            <span class="pb-title frustration">
+              <span lang="it">Scenario di frustrazione</span>
+              <span lang="en">Frustration scenario</span>
+            </span>
+          </div>
+          <p class="frustration-quote">
+            <span lang="it">"Ho mandato la policy di sicurezza a tutto il team tre mesi fa. Nessuno l'ha letta. La settimana scorsa qualcuno ha cliccato su un link di phishing ovvio. Spendo soldi in firewall e antivirus, ma le persone continuano ad essere il problema."</span>
+            <span lang="en">"I sent the security policy to the whole team three months ago. Nobody read it. Last week someone clicked an obvious phishing link. I spend money on firewalls and antivirus, but people keep being the problem."</span>
+          </p>
+          <div class="frustration-points">
+            <div class="f-point"><div class="f-dot"></div><span><span lang="it">La formazione annuale obbligatoria viene dimenticata entro una settimana</span><span lang="en">Mandatory annual training is forgotten within a week</span></span></div>
+            <div class="f-point"><div class="f-dot"></div><span><span lang="it">Non riesce a giustificare investimenti in sicurezza al board senza un incidente reale</span><span lang="en">Can't justify security investments to the board without a real incident first</span></span></div>
+            <div class="f-point"><div class="f-dot"></div><span><span lang="it">I processi esistono sulla carta, ma nessuno li segue davvero</span><span lang="en">Processes exist on paper, but nobody actually follows them</span></span></div>
+          </div>
+        </div>
+        <!-- GOALS -->
+        <div class="persona-block">
+          <div class="pb-header">
+            <div class="pb-icon goal">🎯</div>
+            <span class="pb-title goal">
+              <span lang="it">Cosa vuole davvero</span>
+              <span lang="en">What they really want</span>
+            </span>
+          </div>
+          <div class="goal-list">
+            <div class="g-item"><span class="g-check">✓</span><span><span lang="it">Un team che si comporti in modo sicuro senza dover essere controllato</span><span lang="en">A team that behaves securely without being monitored</span></span></div>
+            <div class="g-item"><span class="g-check">✓</span><span><span lang="it">Processi chiari che resistano al turnover del personale</span><span lang="en">Clear processes that survive staff turnover</span></span></div>
+            <div class="g-item"><span class="g-check">✓</span><span><span lang="it">Superare il prossimo audit senza stress dell'ultimo minuto</span><span lang="en">Pass the next audit without last-minute stress</span></span></div>
+          </div>
+        </div>
+        <!-- SOLUTION -->
+        <div class="persona-block">
+          <div class="pb-header">
+            <div class="pb-icon solution">🔧</div>
+            <span class="pb-title solution">
+              <span lang="it">Come posso aiutarti</span>
+              <span lang="en">How I can help</span>
+            </span>
+          </div>
+          <div class="solution-list">
+            <div class="s-item"><span class="s-arrow">→</span><span><span lang="it"><strong>Audit dei processi</strong> — mappo i flussi reali del tuo team e trovo dove la sicurezza si rompe nella pratica quotidiana</span><span lang="en"><strong>Process audit</strong> — I map your team's real workflows and find where security breaks down in daily practice</span></span></div>
+            <div class="s-item"><span class="s-arrow">→</span><span><span lang="it"><strong>Coaching in sessioni brevi</strong> — 30 minuti, scenari concreti, comportamenti che rimangono</span><span lang="en"><strong>Short-format coaching</strong> — 30 minutes, concrete scenarios, behaviours that stick</span></span></div>
+            <div class="s-item"><span class="s-arrow">→</span><span><span lang="it"><strong>Report per il board</strong> — traduco il rischio tecnico in linguaggio decisionale</span><span lang="en"><strong>Board-ready reporting</strong> — I translate technical risk into decision-making language</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /p1 -->
+
+    <!-- ── PERSONA 2: The Tech Lead ── -->
+    <div class="persona-panel col-amber" id="p2">
+      <div class="persona-profile">
+        <div class="persona-profile-top">
+          <div class="persona-avatar">💻</div>
+          <div class="persona-name">Sofia K.</div>
+          <div class="persona-role-tag">
+            <span lang="it">Tech Lead · Startup SaaS</span>
+            <span lang="en">Tech Lead · SaaS Startup</span>
+          </div>
+          <div class="persona-meta">
+            <div class="persona-meta-row">
+              <span class="persona-meta-key"><span lang="it">Team</span><span lang="en">Team</span></span>
+              <span><span lang="it">8 sviluppatori, full remote</span><span lang="en">8 developers, fully remote</span></span>
+            </div>
+            <div class="persona-meta-row">
+              <span class="persona-meta-key"><span lang="it">Stack</span><span lang="en">Stack</span></span>
+              <span>AWS, microservices, CI/CD</span>
+            </div>
+            <div class="persona-meta-row">
+              <span class="persona-meta-key"><span lang="it">Problema</span><span lang="en">Problem</span></span>
+              <span><span lang="it">Sicurezza vista come ostacolo</span><span lang="en">Security seen as a blocker</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="persona-stats">
+          <div class="persona-stat-row">
+            <div class="persona-stat-label">
+              <span><span lang="it">Security in SDLC</span><span lang="en">Security in SDLC</span></span>
+              <span>20%</span>
+            </div>
+            <div class="persona-stat-bar"><div class="persona-stat-fill" style="width:20%"></div></div>
+          </div>
+          <div class="persona-stat-row">
+            <div class="persona-stat-label">
+              <span><span lang="it">Documentazione tecnica</span><span lang="en">Technical documentation</span></span>
+              <span>35%</span>
+            </div>
+            <div class="persona-stat-bar"><div class="persona-stat-fill" style="width:35%"></div></div>
+          </div>
+          <div class="persona-stat-row">
+            <div class="persona-stat-label">
+              <span><span lang="it">Incident response plan</span><span lang="en">Incident response plan</span></span>
+              <span>5%</span>
+            </div>
+            <div class="persona-stat-bar"><div class="persona-stat-fill" style="width:5%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-content">
+        <div class="persona-block">
+          <div class="pb-header">
+            <div class="pb-icon frustration">⚡</div>
+            <span class="pb-title frustration">
+              <span lang="it">Scenario di frustrazione</span>
+              <span lang="en">Frustration scenario</span>
+            </span>
+          </div>
+          <p class="frustration-quote">
+            <span lang="it">"Capisco perfettamente la sicurezza a livello di codice. Il problema è il resto del team: aprono allegati strani, riusano le password, e ogni volta che chiedo di seguire una procedura mi rispondono che rallenta il deploy. La sicurezza è diventata colpa mia."</span>
+            <span lang="en">"I understand security at the code level perfectly. The problem is the rest of the team: they open weird attachments, reuse passwords, and every time I ask them to follow a procedure they say it slows down the deploy. Security has become my fault."</span>
+          </p>
+          <div class="frustration-points">
+            <div class="f-point"><div class="f-dot"></div><span><span lang="it">Sa spiegare le CVE ma non riesce a far capire ai non-tecnici perché importano</span><span lang="en">Can explain CVEs but can't make non-technical colleagues understand why they matter</span></span></div>
+            <div class="f-point"><div class="f-dot"></div><span><span lang="it">Il security review è visto dal team come burocrazia, non come protezione</span><span lang="en">Security review is seen by the team as bureaucracy, not protection</span></span></div>
+            <div class="f-point"><div class="f-dot"></div><span><span lang="it">Non ha tempo per costruire una cultura della sicurezza mentre fa anche ship di features</span><span lang="en">No time to build a security culture while also shipping features</span></span></div>
+          </div>
+        </div>
+        <div class="persona-block">
+          <div class="pb-header">
+            <div class="pb-icon amber">🎯</div>
+            <span class="pb-title amber">
+              <span lang="it">Cosa vuole davvero</span>
+              <span lang="en">What they really want</span>
+            </span>
+          </div>
+          <div class="goal-list">
+            <div class="g-item"><span class="g-check" style="color:#f59e0b">✓</span><span><span lang="it">Un alleato che traduca la complessità tecnica in linguaggio comprensibile per tutto il team</span><span lang="en">An ally who translates technical complexity into language the whole team understands</span></span></div>
+            <div class="g-item"><span class="g-check" style="color:#f59e0b">✓</span><span><span lang="it">Documentazione che le persone leggano davvero, non solo archivino</span><span lang="en">Documentation people actually read, not just file away</span></span></div>
+            <div class="g-item"><span class="g-check" style="color:#f59e0b">✓</span><span><span lang="it">Un incident response plan scritto in modo umano, non solo per gli ingegneri</span><span lang="en">An incident response plan written for humans, not just engineers</span></span></div>
+          </div>
+        </div>
+        <div class="persona-block">
+          <div class="pb-header">
+            <div class="pb-icon amber">🔧</div>
+            <span class="pb-title amber">
+              <span lang="it">Come posso aiutarti</span>
+              <span lang="en">How I can help</span>
+            </span>
+          </div>
+          <div class="solution-list">
+            <div class="s-item"><span class="s-arrow">→</span><span><span lang="it"><strong>Traduzione tecnica</strong> — trasformo le tue specifiche di sicurezza in comunicazioni che il team non-tecnico capisce e segue</span><span lang="en"><strong>Technical translation</strong> — I turn your security specs into communications the non-technical team understands and follows</span></span></div>
+            <div class="s-item"><span class="s-arrow">→</span><span><span lang="it"><strong>Security storytelling</strong> — scenari reali che rendono il rischio concreto, non astratto</span><span lang="en"><strong>Security storytelling</strong> — real scenarios that make risk concrete, not abstract</span></span></div>
+            <div class="s-item"><span class="s-arrow">→</span><span><span lang="it"><strong>Documentazione leggibile</strong> — runbook, playbook e policy scritti per esseri umani</span><span lang="en"><strong>Human-readable docs</strong> — runbooks, playbooks, and policies written for people</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /p2 -->
+
+    <!-- ── PERSONA 3: The Founder ── -->
+    <div class="persona-panel col-green" id="p3">
+      <div class="persona-profile">
+        <div class="persona-profile-top">
+          <div class="persona-avatar">🚀</div>
+          <div class="persona-name">Luca M.</div>
+          <div class="persona-role-tag">
+            <span lang="it">CEO & Fondatore · Scale-up</span>
+            <span lang="en">CEO & Founder · Scale-up</span>
+          </div>
+          <div class="persona-meta">
+            <div class="persona-meta-row">
+              <span class="persona-meta-key"><span lang="it">Fase</span><span lang="en">Stage</span></span>
+              <span><span lang="it">Serie A, 25 dipendenti</span><span lang="en">Series A, 25 employees</span></span>
+            </div>
+            <div class="persona-meta-row">
+              <span class="persona-meta-key"><span lang="it">Urgenza</span><span lang="en">Urgency</span></span>
+              <span><span lang="it">Enterprise client richiede compliance</span><span lang="en">Enterprise client requires compliance</span></span>
+            </div>
+            <div class="persona-meta-row">
+              <span class="persona-meta-key"><span lang="it">Paura</span><span lang="en">Fear</span></span>
+              <span><span lang="it">Perdere il contratto più grande</span><span lang="en">Losing the biggest contract</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="persona-stats">
+          <div class="persona-stat-row">
+            <div class="persona-stat-label">
+              <span><span lang="it">Politiche formali</span><span lang="en">Formal policies</span></span>
+              <span>5%</span>
+            </div>
+            <div class="persona-stat-bar"><div class="persona-stat-fill" style="width:5%"></div></div>
+          </div>
+          <div class="persona-stat-row">
+            <div class="persona-stat-label">
+              <span><span lang="it">Training documentato</span><span lang="en">Documented training</span></span>
+              <span>0%</span>
+            </div>
+            <div class="persona-stat-bar"><div class="persona-stat-fill" style="width:0%"></div></div>
+          </div>
+          <div class="persona-stat-row">
+            <div class="persona-stat-label">
+              <span><span lang="it">Vendor risk management</span><span lang="en">Vendor risk management</span></span>
+              <span>12%</span>
+            </div>
+            <div class="persona-stat-bar"><div class="persona-stat-fill" style="width:12%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-content">
+        <div class="persona-block">
+          <div class="pb-header">
+            <div class="pb-icon frustration">⚡</div>
+            <span class="pb-title frustration">
+              <span lang="it">Scenario di frustrazione</span>
+              <span lang="en">Frustration scenario</span>
+            </span>
+          </div>
+          <p class="frustration-quote">
+            <span lang="it">"Un potenziale cliente enterprise ci ha mandato un questionario di sicurezza di 80 domande. Non sapevo rispondere a metà. Abbiamo buttato via settimane a correre ai ripari. Ora ho paura del prossimo audit — e non so nemmeno da dove cominciare."</span>
+            <span lang="en">"A potential enterprise client sent us an 80-question security questionnaire. I couldn't answer half of it. We wasted weeks scrambling. Now I'm dreading the next audit — and I don't even know where to start."</span>
+          </p>
+          <div class="frustration-points">
+            <div class="f-point"><div class="f-dot"></div><span><span lang="it">La sicurezza è sempre stata "la faremo dopo" — adesso il dopo è arrivato con urgenza</span><span lang="en">Security was always "we'll do it later" — now later has arrived urgently</span></span></div>
+            <div class="f-point"><div class="f-dot"></div><span><span lang="it">Non ha le risorse per un CISO full-time ma ne ha bisogno per crescere</span><span lang="en">Can't afford a full-time CISO but needs one to grow</span></span></div>
+            <div class="f-point"><div class="f-dot"></div><span><span lang="it">Ogni consulente che ha incontrato parla solo di tool, non di come far capire la sicurezza alle persone</span><span lang="en">Every consultant they've met talks only about tools, not how to make people understand security</span></span></div>
+          </div>
+        </div>
+        <div class="persona-block">
+          <div class="pb-header">
+            <div class="pb-icon goal">🎯</div>
+            <span class="pb-title goal">
+              <span lang="it">Cosa vuole davvero</span>
+              <span lang="en">What they really want</span>
+            </span>
+          </div>
+          <div class="goal-list">
+            <div class="g-item"><span class="g-check">✓</span><span><span lang="it">Una security posture credibile che sblocchi i contratti enterprise</span><span lang="en">A credible security posture that unlocks enterprise contracts</span></span></div>
+            <div class="g-item"><span class="g-check">✓</span><span><span lang="it">Un piano concreto, non un documento di 200 pagine che nessuno capisce</span><span lang="en">A concrete plan, not a 200-page document nobody understands</span></span></div>
+            <div class="g-item"><span class="g-check">✓</span><span><span lang="it">Costruire una cultura che scala con l'azienda, non che collassa alla prima crisi</span><span lang="en">Build a culture that scales with the company, not one that collapses at the first crisis</span></span></div>
+          </div>
+        </div>
+        <div class="persona-block">
+          <div class="pb-header">
+            <div class="pb-icon solution" style="background:var(--green-dim)">🔧</div>
+            <span class="pb-title solution" style="color:var(--green)">
+              <span lang="it">Come posso aiutarti</span>
+              <span lang="en">How I can help</span>
+            </span>
+          </div>
+          <div class="solution-list">
+            <div class="s-item"><span class="s-arrow">→</span><span><span lang="it"><strong>Security baseline rapida</strong> — identifico le priorità reali, non le best practice teoriche, in base alla tua fase di crescita</span><span lang="en"><strong>Fast security baseline</strong> — I identify real priorities, not theoretical best practices, based on your growth stage</span></span></div>
+            <div class="s-item"><span class="s-arrow">→</span><span><span lang="it"><strong>Policy leggibili</strong> — documenti che il tuo team segue davvero e che convincono i clienti enterprise</span><span lang="en"><strong>Readable policies</strong> — documents your team actually follows and that convince enterprise clients</span></span></div>
+            <div class="s-item"><span class="s-arrow">→</span><span><span lang="it"><strong>Coaching per i founder</strong> — capisci il rischio reale e sai comunicarlo agli investitori e ai clienti</span><span lang="en"><strong>Founder coaching</strong> — understand real risk and communicate it clearly to investors and clients</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /p3 -->
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ── FEEDBACK ── -->
 <section id="feedback">
   <div class="section-wrap">
     <div class="section-label">
-      <span lang="it">// 04 — feedback &amp; impatto</span>
-      <span lang="en">// 04 — feedback &amp; impact</span>
+      <span lang="it">// 05 — feedback &amp; impatto</span>
+      <span lang="en">// 05 — feedback &amp; impact</span>
     </div>
     <h2 class="section-title" style="margin-bottom:2.5rem">
       <span lang="it">Fidata dai Leader della Sicurezza</span>
@@ -1657,8 +2226,8 @@ span[lang="it"], span[lang="en"] { display: inline; }
     <div class="cta-grid">
       <div class="cta-text">
         <div class="section-label">
-          <span lang="it">// 05 — costruiamo insieme</span>
-          <span lang="en">// 05 — let's build together</span>
+          <span lang="it">// 06 — costruiamo insieme</span>
+          <span lang="en">// 06 — let's build together</span>
         </div>
         <h2 class="section-title">
           <span lang="it">Costruisci una<br>Cultura Resiliente.</span>
@@ -1870,7 +2439,7 @@ document.querySelectorAll('nav a').forEach(a => {
    SCROLL-TRIGGERED REVEAL
 ═══════════════════════════════════ */
 const revealEls = document.querySelectorAll(
-  '.pillar, .svc-card, .journey-step, .fb-card, .identity-card, .manifesto'
+  '.pillar, .svc-card, .journey-step, .fb-card, .identity-card, .manifesto, .persona-block, .persona-profile'
 );
 revealEls.forEach(el => {
   el.style.opacity = '0';
@@ -1889,6 +2458,31 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 revealEls.forEach(el => io.observe(el));
+/* ═══════════════════════════════════
+   PERSONA TABS
+═══════════════════════════════════ */
+const tabs   = document.querySelectorAll('.p-tab');
+const panels = document.querySelectorAll('.persona-panel');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.panel;
+
+    tabs.forEach(t => t.classList.remove('active'));
+    panels.forEach(p => { p.classList.remove('active'); });
+
+    tab.classList.add('active');
+    const activePanel = document.getElementById(target);
+    activePanel.classList.add('active');
+
+    // Re-trigger bar animations inside the newly visible panel
+    activePanel.querySelectorAll('.persona-stat-fill, .resilience-bar-fill, .skill-bar-fill').forEach(bar => {
+      bar.style.animation = 'none';
+      bar.offsetHeight; // reflow
+      bar.style.animation = '';
+    });
+  });
+});
 </script>
 </body>
 </html>
