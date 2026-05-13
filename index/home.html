@@ -758,9 +758,6 @@ h2.section-title {
   position: relative;
   overflow: hidden;
   transition: background 0.3s;
-  display: flex;          
-  flex-direction: column; 
-  height: 100%;
 }
 .svc-card:hover { background: var(--bg2); }
 
@@ -817,8 +814,6 @@ h2.section-title {
   font-size: 10px;
   letter-spacing: 0.12em;
   opacity: 0.7;
-  margin-top: auto;       
-  padding-top: 1.5rem;
 }
 .svc-card.c-cyan   .svc-tag { color: var(--cyan); }
 .svc-card.c-green  .svc-tag { color: var(--green); }
@@ -1493,38 +1488,18 @@ span[lang="it"], span[lang="en"] { display: inline; }
   .btn-primary, .btn-ghost { text-align: center; width: 100%; }
 }
 
-/* ── SERVICE HASHTAG ROW ── */
-.svc-hashtag-row {
+/* rf-error message */
+.rf-error {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-top: 2rem;
-  padding: 1rem 1.5rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  flex-wrap: wrap;
-}
-.svc-hashtag-row .svc-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  opacity: 1;
-  padding: 0.35rem 0.85rem;
-  border-radius: 20px;
-  border: 1px solid transparent;
-  transition: background 0.2s, border-color 0.2s;
-}
-.svc-hashtag-row .svc-tag.c-cyan   { color: var(--cyan);   background: var(--cyan-dim);   border-color: rgba(56,189,248,0.2); }
-.svc-hashtag-row .svc-tag.c-green  { color: var(--green);  background: var(--green-dim);  border-color: rgba(52,211,153,0.2); }
-.svc-hashtag-row .svc-tag.c-indigo { color: var(--indigo); background: var(--indigo-dim); border-color: rgba(129,140,248,0.2); }
-.svc-hashtag-row .svc-tag:hover { opacity: 0.85; }
-.svc-hashtag-sep {
-  color: var(--text3);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  user-select: none;
+  gap: 0.75rem;
+  font-size: 13px;
+  color: #f87171;
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.2);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  animation: fadeUp 0.4s ease both;
 }
 
 /* ── REVIEW SECTION ── */
@@ -1750,24 +1725,16 @@ span[lang="it"], span[lang="en"] { display: inline; }
         </h2>
 
         <p>
-          <span lang="it">Il mio percorso è insolito per design. </span>
-          <span lang="en">My path is unconventional by design. </span>
-        </p>
-         <p>
-          <span lang="it">Come <strong>caporedattrice</strong> ho imparato che le sfide più grandi di un team non sono tecniche, ma comunicative: il segreto è scomporre sistemi complessi in azioni semplici e coordinate. </span>
-          <span lang="en">As an <strong>Editor-in-Chief</strong>, I learned that the greatest challenges within a team aren’t technical, but communicative: success lies in breaking down complex systems into clear, actionable tasks. </span>
+          <span lang="it">Il mio percorso è insolito per design. Come <strong>Direttore della pubblicazione scolastica</strong>, ho imparato che il problema di ingegneria più difficile non è tecnico — è la comunicazione. Scomporre sistemi complessi in chiarezza che muove le persone all'azione.</span>
+          <span lang="en">My path is unconventional by design. As <strong>Editor-in-Chief of my school publication</strong>, I learned early that the hardest engineering problem isn't technical — it's communication. Breaking down complex systems into clarity that moves people to act.</span>
         </p>
         <p>
-          <span lang="it">Come <strong>tutor</strong> ho affinato lo strumento di sicurezza di cui tutti si dimenticano: la comprensione umana. </span>
-          <span lang="en">As a <strong>tutor</strong>, I honed the security tool everyone forgets: human understanding. </span>
+          <span lang="it">Come <strong>tutor</strong>, ho affinato lo strumento di sicurezza più sottovalutato: la comprensione umana. L'<strong>Ingegneria Elettronica</strong> mi ha dato il framework analitico — precisione a livello di circuito, integrità del segnale, pensiero sistemico.</span>
+          <span lang="en">As a <strong>tutor</strong>, I refined the most underestimated security tool in existence: human understanding. <strong>Electronic Engineering</strong> gave me the analytical framework — circuit-level precision, signal integrity, systems thinking.</span>
         </p>
         <p>
-          <span lang="it">L’<strong>Ingegneria Elettronica</strong> mi ha fornito il framework analitico — precisione, pensiero sistemico e capacità di sintesi — per governare questa complessità.</span>
-          <span lang="en"><strong>Electronic Engineering</strong> provided the analytical framework—precision, systems thinking, and synthesis—needed to master these dynamics. </span>
-        </p>
-        <p>
-          <span lang="it">La sinergia di queste esperienze confluisce in un’unica filosofia: <strong>la sicurezza non si installa, si comprende.</strong></span>
-          <span lang="en">The synergy of these skills is driven by a single philosophy: <strong>security is not installed, it is understood.</strong></span>
+          <span lang="it">Insieme, queste discipline formano una sola filosofia: <strong>la sicurezza non si installa, si comprende.</strong></span>
+          <span lang="en">Together, these disciplines form a single philosophy: <strong>security is not installed, it is understood.</strong></span>
         </p>
 
         <div class="pillars">
@@ -1935,7 +1902,7 @@ span[lang="it"], span[lang="en"] { display: inline; }
           <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <h3><span lang="it">Coaching sulla Sicurezza</span><span lang="en">Security Coaching</span></h3>
-          <p><span lang="it">Rendo semplici le sfide digitali complesse. Insegno a riconoscere il phishing e a governare le proprie identità digitali: tutta la precisione dell'ingegneria, spiegata per essere usata da chiunque.</span><span lang="en">Simplifying complex digital challenges. I teach how to spot phishing and master digital identity: all the precision of engineering, explained for everyone to use.</span></p>
+        <p><span lang="it">Traduco le minacce tecniche in abitudini umane attuabili. Dal riconoscimento del phishing all'igiene delle password — literacy ingegneristica per ogni membro del team.</span><span lang="en">Translating technical threats into actionable human habits. From phishing awareness to password hygiene — engineering literacy for every member of the team.</span></p>
         <span class="svc-tag">#HumanFirewall</span>
       </div>
 
@@ -1950,6 +1917,7 @@ span[lang="it"], span[lang="en"] { display: inline; }
       </div>
 
     </div>
+  </div>
 </section>
 
 <div class="divider"></div>
@@ -2467,6 +2435,11 @@ span[lang="it"], span[lang="en"] { display: inline; }
           <span lang="it">Grazie! La tua recensione è stata inviata.</span>
           <span lang="en">Thank you! Your review has been submitted.</span>
         </div>
+        <div class="rf-error" id="rvError" style="display:none">
+          <span class="rf-success-icon">✗</span>
+          <span lang="it">Ops! Qualcosa è andato storto. Riprova o scrivi direttamente a valentina.segatti@gmail.com</span>
+          <span lang="en">Oops! Something went wrong. Try again or write to valentina.segatti@gmail.com</span>
+        </div>
       </div>
     </div>
   </div>
@@ -2770,17 +2743,25 @@ document.getElementById('langBtn').addEventListener('click', () => {
   setTimeout(updatePlaceholders, 10);
 });
 
-// Submit
-document.getElementById('rvSubmit').addEventListener('click', () => {
-  const name = document.getElementById('rv-name').value.trim();
-  const role = document.getElementById('rv-role').value.trim();
-  const text = document.getElementById('rv-text').value.trim();
+// ═══════════════════════════════════════════════════════════════
+// SUBMIT — invia a Formspree, ti arriva la mail
+// SETUP (una sola volta):
+//   1. Vai su https://formspree.io e crea un account gratuito
+//   2. Clicca "New Form", dai un nome (es. "Recensioni sito")
+//   3. Copia il tuo Form ID (es. "xpwzgkrb")
+//   4. Sostituisci YOUR_FORMSPREE_ID qui sotto con il tuo ID
+// ═══════════════════════════════════════════════════════════════
+const FORMSPREE_ID = 'YOUR_FORMSPREE_ID';
 
+document.getElementById('rvSubmit').addEventListener('click', async () => {
+  const name  = document.getElementById('rv-name').value.trim();
+  const role  = document.getElementById('rv-role').value.trim();
+  const text  = document.getElementById('rv-text').value.trim();
+  const stars_label = '★'.repeat(selectedStars) + '☆'.repeat(5 - selectedStars);
+
+  // Validazione
   if (!text || selectedStars === 0) {
-    // Shake the form slightly if fields are empty
     const form = document.getElementById('reviewForm');
-    form.style.animation = 'none';
-    form.offsetHeight;
     form.style.transition = 'transform 0.1s';
     form.style.transform = 'translateX(6px)';
     setTimeout(() => { form.style.transform = 'translateX(-6px)'; }, 100);
@@ -2788,20 +2769,51 @@ document.getElementById('rvSubmit').addEventListener('click', () => {
     return;
   }
 
-  // Show success
-  document.getElementById('rvSuccess').style.display = 'flex';
-  document.getElementById('rvSubmit').style.display = 'none';
-  document.getElementById('rv-name').value = '';
-  document.getElementById('rv-role').value = '';
-  document.getElementById('rv-text').value = '';
-  selectedStars = 0;
-  stars.forEach(s => s.classList.remove('active'));
+  // Blocca il bottone durante l'invio
+  const btn = document.getElementById('rvSubmit');
+  btn.style.opacity = '0.5';
+  btn.style.pointerEvents = 'none';
 
-  // Hide success after 5s and reset
-  setTimeout(() => {
-    document.getElementById('rvSuccess').style.display = 'none';
-    document.getElementById('rvSubmit').style.display = 'inline-block';
-  }, 5000);
+  try {
+    const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: '⭐ Nuova recensione da ' + (name || 'Anonimo') + ' — ' + stars_label,
+        nome:        name  || 'Anonimo',
+        ruolo:       role  || 'Non specificato',
+        voto:        stars_label + ' (' + selectedStars + '/5)',
+        recensione:  text,
+        data:        new Date().toLocaleString('it-IT', { timeZone: 'Europe/Rome' })
+      })
+    });
+
+    if (res.ok) {
+      // Successo
+      document.getElementById('rvSuccess').style.display = 'flex';
+      btn.style.display = 'none';
+      document.getElementById('rv-name').value  = '';
+      document.getElementById('rv-role').value  = '';
+      document.getElementById('rv-text').value  = '';
+      selectedStars = 0;
+      stars.forEach(s => s.classList.remove('active'));
+
+      setTimeout(() => {
+        document.getElementById('rvSuccess').style.display = 'none';
+        btn.style.display        = 'inline-block';
+        btn.style.opacity        = '1';
+        btn.style.pointerEvents  = 'auto';
+      }, 5000);
+    } else {
+      throw new Error('Errore server');
+    }
+  } catch(e) {
+    // Mostra errore
+    const err = document.getElementById('rvError');
+    if (err) { err.style.display = 'flex'; setTimeout(() => { err.style.display = 'none'; }, 4000); }
+    btn.style.opacity       = '1';
+    btn.style.pointerEvents = 'auto';
+  }
 });
 
 </script>
