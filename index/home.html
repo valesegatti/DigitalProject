@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" data-theme="dark" data-lang="it">
+<html lang="it" data-theme="light" data-lang="it">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2613,7 +2613,7 @@ const themeBtn  = document.getElementById('themeBtn');
 const themeIcon = document.getElementById('themeIcon');
 
 // Read saved preference or default to dark
-const savedTheme = localStorage.getItem('vs-theme') || 'dark';
+const savedTheme = localStorage.getItem('vs-theme') || 'light';
 html.setAttribute('data-theme', savedTheme);
 themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
 
